@@ -16,7 +16,7 @@ namespace YH.Arch.Infrastructure.ORM
             this.context = context;
         }
 
-        public T GetSingle<T>(QueryByEntity<T> query) where T : BaseEntity
+        public T GetSingle<T>(Query<T> query) where T : BaseEntity
         {
             if (query is QueryByEntity<T> entityQuery)
             {
@@ -25,7 +25,7 @@ namespace YH.Arch.Infrastructure.ORM
             throw new System.Exception($"不支持的Query类型: {typeof(Query<>)}");
         }
 
-        public IEnumerable<T> GetMulti<T>(QueryByEntity<T> query) where T : BaseEntity
+        public IEnumerable<T> GetMulti<T>(Query<T> query) where T : BaseEntity
         {
             if (query is QueryByEntity<T> entityQuery)
             {
@@ -34,7 +34,7 @@ namespace YH.Arch.Infrastructure.ORM
             throw new System.Exception($"不支持的Query类型: {typeof(Query<>)}");
         }
 
-        public int GetCount<T>(QueryByEntity<T> query) where T : BaseEntity
+        public int GetCount<T>(Query<T> query) where T : BaseEntity
         {
             if (query is QueryByEntity<T> entityQuery)
             {
@@ -43,7 +43,7 @@ namespace YH.Arch.Infrastructure.ORM
             throw new System.Exception($"不支持的Query类型: {typeof(Query<>)}");
         }
 
-        public bool Existed<T>(QueryByEntity<T> query) where T : BaseEntity
+        public bool Existed<T>(Query<T> query) where T : BaseEntity
         {
             if (query is QueryByEntity<T> entityQuery)
             {
