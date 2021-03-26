@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using YH.Arch.Domain;
 
 namespace YH.Arch.Infrastructure.ORM
@@ -18,5 +19,6 @@ namespace YH.Arch.Infrastructure.ORM
         void Remove<T>(IEnumerable<T> entities) where T : BaseEntity;
         void Flush();
         Task FlushAsync();
+        DatabaseFacade GetDatabase();
     }
 }

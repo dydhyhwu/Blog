@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using YH.Arch.Domain;
 
 namespace YH.Arch.Infrastructure.ORM
@@ -90,6 +91,11 @@ namespace YH.Arch.Infrastructure.ORM
         public Task FlushAsync()
         {
             return this.context.SaveChangesAsync();
+        }
+
+        public DatabaseFacade GetDatabase()
+        {
+            return context.Database;
         }
 
         private DbSet<T> Entity<T>() where T : BaseEntity
