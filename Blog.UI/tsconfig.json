@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+    "suppressImplicitAnyIndexErrors":true,
     "target": "esnext",
     "module": "esnext",
-    "strict": true,
+    "strict": false,
     "jsx": "preserve",
+    "strictPropertyInitialization": false,
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
