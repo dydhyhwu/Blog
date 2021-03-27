@@ -51,6 +51,8 @@ namespace Blog.API
                 });
             });
 
+            services.AddAutoMapper(typeof(BlogRepository).Assembly);
+
             #region “¿¿µ◊¢»Î
 
             services.AddScoped<Repository, BlogRepository>();
