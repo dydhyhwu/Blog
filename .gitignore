@@ -435,3 +435,4 @@ MigrationBackup/
 *.code-workspace
 
 appsettings.json
+Blog.UI/src/config/index.ts
