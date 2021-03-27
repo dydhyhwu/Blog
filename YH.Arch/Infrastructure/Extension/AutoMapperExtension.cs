@@ -1,43 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using AutoMapper.Internal;
 
 namespace YH.Arch.Infrastructure.Extension
 {
-    public static class AssemblyExtension
+    public static class AutoMapperExtension
     {
-        public static IEnumerable<Type> GetGenericImpls(this Assembly assembly, Type target)
+        public static IList<TDest> MapList<TSource, TDest>(this IMapper mapper, IList<TSource> source)
         {
-            return assembly.GetTypes()
-                .Where(type =>
-                    type.GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == target
-                    )
-                );
+            return mapper.Map<IList<TSource>, IList<TDest>>(source);
         }
 
-        public static IEnumerable<MapperElement> GetMapperElements(this Assembly assembly)
+        public static IList<TDest> MapList<TSource, TDest>(this IRuntimeMapper mapper, IList<TSource> source)
         {
-            var target = typeof(ITypeConverter<,>);
-            return assembly.GetGenericImpls(target).Select(x =>
-            {
-                var args = x.GetGenericInterface(target).GetGenericArguments();
-                return new MapperElement()
-                {
-                    SourceType = args[0],
-                    DestinationType = args[1],
-                    Converter = x,
-                };
-            });
+            return mapper.Map<IList<TSource>, IList<TDest>>(source);
         }
-    }
-
-    public class MapperElement
-    {
-        public Type SourceType { get; set; }
-        public Type DestinationType { get; set; }
-        public Type Converter { get; set; }
     }
 }
