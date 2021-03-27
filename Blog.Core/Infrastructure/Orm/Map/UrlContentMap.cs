@@ -8,6 +8,7 @@ namespace Blog.Core.Infrastructure.Orm.Map
     {
         public UrlContentMap(ModelBuilder modelBuilder) : base(modelBuilder)
         {
+            _builder.ToTable(nameof(UrlContent));
         }
     }
 }
