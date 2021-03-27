@@ -1,11 +1,15 @@
+using Blog.Core.Infrastructure.Orm;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using YH.Arch.Infrastructure;
 using YH.Arch.Infrastructure.Filter;
 using YH.Arch.Infrastructure.Middlware;
+using YH.Arch.Infrastructure.ORM;
 
 namespace Blog.API
 {
@@ -25,7 +29,12 @@ namespace Blog.API
         {
 
             services.AddControllers()
-                .AddMvcOptions(options => options.Filters.Add<ApiResponseFilter>());
+                .AddMvcOptions(options => options.Filters.Add<ApiResponseFilter>())
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver = Settings.JsonSerializer.ContractResolver;
+                    options.SerializerSettings.DateFormatString = Settings.JsonSerializer.DateFormatString;
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog.API", Version = "v1" });
@@ -41,6 +50,17 @@ namespace Blog.API
                         .AllowAnyMethod();
                 });
             });
+
+            #region “¿¿µ◊¢»Î
+
+            services.AddScoped<Repository, BlogRepository>();
+            services.AddDbContext<BlogContext>(options =>
+            {
+                options.UseLazyLoadingProxies();
+                options.UseMySQL(Configuration["Db"]);
+            });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
