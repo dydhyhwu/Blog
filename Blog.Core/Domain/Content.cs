@@ -2,7 +2,7 @@
 
 namespace Blog.Core.Domain
 {
-    public class Content : BaseEntity, Authorized
+    public class Content : BaseEntity, Authorizeable
     {
         public string Title { get; set; }
         public string Value { get; set; }

@@ -1,4 +1,6 @@
 using Blog.Core.Infrastructure.Orm;
+using Blog.Core.Service;
+using Blog.Core.Service.Impl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -61,6 +63,8 @@ namespace Blog.API
                 options.UseLazyLoadingProxies();
                 options.UseMySQL(Configuration["Db"]);
             });
+
+            services.AddScoped<FavoriteLinkService, FavoriteLinkServiceImpl>();
 
             #endregion
         }
