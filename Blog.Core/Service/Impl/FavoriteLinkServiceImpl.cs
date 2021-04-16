@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Blog.Core.Domain;
+using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using YH.Arch.Infrastructure.ORM;
@@ -11,21 +12,19 @@ namespace Blog.Core.Service.Impl
     {
         private readonly Repository repository;
         private readonly IMapper mapper;
+        private readonly Queries queries;
 
-        public FavoriteLinkServiceImpl(Repository repository, IMapper mapper)
+        public FavoriteLinkServiceImpl(Repository repository, IMapper mapper, Queries queries)
         {
             this.repository = repository;
             this.mapper = mapper;
+            this.queries = queries;
         }
 
         public FavoriteLinkOutput Get(Guid id)
         {
-            return new FavoriteLinkOutput()
-            {
-                Title = "Bilibli下载器",
-                Description = "目前还挺好的一个下载器",
-                Content = "https://github.com/SigureMo/bilili",
-            };
+            var link = repository.GetSingle(queries.GetFavoriteLink(id));
+            return mapper.Map<FavoriteLinkOutput>(link);
         }
 
         public void Add(FavoriteLinkAddInput addInput)
