@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Core.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20210413062812_add_favoriteLink")]
-    partial class add_favoriteLink
+    [Migration("20210416095332_add_favorite_link")]
+    partial class add_favorite_link
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,24 +21,24 @@ namespace Blog.Core.Migrations
 
             modelBuilder.Entity("Blog.Core.Domain.Content", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("AuthorizeCode")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("NeedAuthorized")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Value")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -50,7 +50,7 @@ namespace Blog.Core.Migrations
                     b.HasBaseType("Blog.Core.Domain.Content");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.ToTable("FavoriteLink");
                 });

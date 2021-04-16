@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blog.Core.Migrations
 {
-    public partial class add_favoriteLink : Migration
+    public partial class add_favorite_link : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,12 +11,12 @@ namespace Blog.Core.Migrations
                 name: "Content",
                 columns: table => new
                 {
-                    Id = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    Value = table.Column<string>(type: "text", nullable: true),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Title = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Value = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     NeedAuthorized = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AuthorizeCode = table.Column<string>(type: "text", nullable: true),
-                    CreateTime = table.Column<DateTime>(type: "datetime", nullable: false)
+                    AuthorizeCode = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,8 +27,8 @@ namespace Blog.Core.Migrations
                 name: "FavoriteLink",
                 columns: table => new
                 {
-                    Id = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Description = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {

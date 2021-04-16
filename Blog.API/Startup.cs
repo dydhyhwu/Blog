@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using YH.Arch.Infrastructure;
 using YH.Arch.Infrastructure.Filter;
 using YH.Arch.Infrastructure.Middlware;
@@ -61,7 +62,13 @@ namespace Blog.API
             services.AddDbContext<BlogContext>(options =>
             {
                 options.UseLazyLoadingProxies();
-                options.UseMySQL(Configuration["Db"]);
+                options.UseMySql(
+                    Configuration["Db"], 
+                    ServerVersion.AutoDetect(Configuration["Db"]), 
+                    mysqlOptions =>
+                    {
+                        mysqlOptions.CharSet(CharSet.Utf8Mb4);
+                    });
             });
 
             services.AddScoped<FavoriteLinkService, FavoriteLinkServiceImpl>();

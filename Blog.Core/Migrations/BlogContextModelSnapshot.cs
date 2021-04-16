@@ -19,24 +19,24 @@ namespace Blog.Core.Migrations
 
             modelBuilder.Entity("Blog.Core.Domain.Content", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("AuthorizeCode")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("NeedAuthorized")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Value")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -48,7 +48,7 @@ namespace Blog.Core.Migrations
                     b.HasBaseType("Blog.Core.Domain.Content");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.ToTable("FavoriteLink");
                 });

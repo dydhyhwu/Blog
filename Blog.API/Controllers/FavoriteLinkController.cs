@@ -1,4 +1,5 @@
 ﻿using System;
+using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using Blog.Core.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,12 @@ namespace Blog.API.Controllers
         public FavoriteLinkOutput Get(Guid id)
         {
             return service.Get(id);
+        }
+
+        [HttpPost]
+        public void Add(FavoriteLinkAddInput addInput)
+        {
+            service.Add(addInput);
         }
     }
 }
