@@ -1,1 +1,1 @@
-export const FavoriteLink = 'FavoriteLink';
+export const FavoriteLinkInfo = 'FavoriteLink';

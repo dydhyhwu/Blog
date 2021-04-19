@@ -3,10 +3,13 @@ import AxiosHttpRequestFilter from '@/infrastructure/http/HttpRequestFilter';
 import AxiosHttpErrorHandler from '@/infrastructure/http/HttpErrorHandler';
 import AxiosHttp from '@/infrastructure/http';
 import config from '@/config';
+import SimpleNavigation from '@/infrastructure/navigator';
+import router from '@/router';
 
 export default class Startup {
     static init(): void {
         Startup.configurationHttp();
+        Startup.configurationRouter();
     }
 
     private static configurationHttp() {
@@ -17,5 +20,9 @@ export default class Startup {
             .setResponseHandler(responseHandler)
             .setRequestFilter(requestFilter)
             .setSystemErrorHandler(errorHandler);
+    }
+
+    private static configurationRouter() {
+        SimpleNavigation.Init(router);
     }
 }
