@@ -1,4 +1,4 @@
-export interface FavoriteLink {
+export class FavoriteLink {
     title: string;
     description: string;
     content: string;
