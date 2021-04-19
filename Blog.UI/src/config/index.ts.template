@@ -1,4 +1,4 @@
 const config = {
-  Host: '/api'
+    Host: 'http://localhost:5001',
 };
 export default config;
