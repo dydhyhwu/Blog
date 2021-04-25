@@ -14,5 +14,21 @@ namespace Blog.Core.Infrastructure.Orm
                 return query.Where(x => x.Id == id);
             });
         }
+
+        public Query<Article> GetArticle(Guid id)
+        {
+            return QueryByEntity<Article>.Of(query =>
+            {
+                return query.Where(x => x.Id == id);
+            });
+        }
+
+        public QueryByEntity<Article> GetArticles()
+        {
+            return QueryByEntity<Article>.Of(query =>
+            {
+                return query;
+            });
+        }
     }
 }

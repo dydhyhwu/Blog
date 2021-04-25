@@ -73,6 +73,7 @@ namespace Blog.API
 
             services.AddScoped<FavoriteLinkService, FavoriteLinkServiceImpl>();
             services.AddScoped<Queries, QueriesImpl>();
+            services.AddScoped<ArticleService, ArticleServiceImpl>();
 
             #endregion
         }
