@@ -39,11 +39,11 @@ namespace Blog.Core.Service.Impl
         public PageList<ArticleListItemOutput> List(PageListInput input)
         {
             var count = repository.GetCount(queries.GetArticles());
-            var articles = repository.GetMulti(queries.GetArticles().PaginationBy(input.Page, input.Size)).ToList();
+            var articles = repository.GetMulti(queries.GetArticles().PaginationBy(input.Index, input.Size)).ToList();
             return new PageList<ArticleListItemOutput>()
             {
                 Count = count,
-                Index = input.Page,
+                Index = input.Index,
                 Size = input.Size,
                 Data = mapper.MapList<Article, ArticleListItemOutput>(articles),
             };
