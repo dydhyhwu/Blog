@@ -1,7 +1,7 @@
 import { Page } from '@/domain/page';
 import AxiosHttp from '@/infrastructure/http';
 import { PageData } from '@/models/Page';
-import { ArticleListItem } from '@/models/Article';
+import { Article, ArticleListItem } from '@/models/Article';
 
 export default class ArticleRepository {
     List(page: Page) {
@@ -9,5 +9,12 @@ export default class ArticleRepository {
             '/Article/List',
             page
         );
+    }
+
+    Get(id: string) {
+        const param = {
+            id: id,
+        };
+        return AxiosHttp.Instance.get<Article>('/Article/Get', param);
     }
 }

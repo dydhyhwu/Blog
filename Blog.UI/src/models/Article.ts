@@ -3,3 +3,10 @@ export interface ArticleListItem {
     title: string;
     createTime: string;
 }
+
+export interface Article {
+    id: string;
+    title: string;
+    content: string;
+    createTime: string;
+}

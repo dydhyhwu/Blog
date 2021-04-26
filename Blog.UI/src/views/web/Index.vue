@@ -48,7 +48,10 @@
                                         </v-img>
                                     </v-col>
                                     <v-col align-self="center">
-                                        <div class="title">
+                                        <div
+                                            class="title"
+                                            @click="detail(article.id)"
+                                        >
                                             {{ article.title }}
                                         </div>
                                         <v-divider></v-divider>
@@ -89,16 +92,18 @@
 <script lang="ts">
     import { Vue, Component, Inject } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
-    import { Home } from '@/domain/views';
-    import { Repository } from '@/domain/providers';
+    import { ArticleDetail, Home } from '@/domain/views';
+    import { Navigator, Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
     import { Page } from '@/domain/page';
     import { ArticleListItem } from '@/models/Article';
+    import { Navigation } from '@/infrastructure/navigator';
 
     @RouteName(Home)
     @Component
     export default class HomePage extends Vue {
         @Inject(Repository) repository: Repositories;
+        @Inject(Navigator) navigator: Navigation;
 
         page: Page = new Page();
         articles: ArticleListItem[] = [];
@@ -112,6 +117,12 @@
             this.page.count = response.count;
             this.page.page = response.page;
             this.articles = response.data;
+        }
+
+        detail(id: string) {
+            this.navigator.redirect(ArticleDetail, {
+                id: id,
+            });
         }
     }
 </script>
