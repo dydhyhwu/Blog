@@ -29,6 +29,7 @@
                         <v-card
                             v-for="(article, index) in articles"
                             :key="index"
+                            class="my-2"
                         >
                             <v-container>
                                 <v-row>
