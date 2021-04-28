@@ -5,8 +5,14 @@ export interface ArticleListItem {
 }
 
 export interface Article {
-    id: string;
+    id?: string;
     title: string;
     content: string;
-    createTime: string;
+    format?: ContentFormat;
+    createTime?: string;
+}
+
+export enum ContentFormat {
+    Markdown,
+    Html,
 }

@@ -17,4 +17,8 @@ export default class ArticleRepository {
         };
         return AxiosHttp.Instance.get<Article>('/Article/Get', param);
     }
+
+    async Add(article: Article) {
+        return AxiosHttp.Instance.post('/Article/Add', article);
+    }
 }

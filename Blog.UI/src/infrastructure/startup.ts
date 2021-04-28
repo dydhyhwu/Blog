@@ -5,9 +5,12 @@ import AxiosHttp from '@/infrastructure/http';
 import config from '@/config';
 import SimpleNavigation from '@/infrastructure/navigator';
 import router from '@/router';
+import Vue from 'vue';
+import MavonEditor from 'mavon-editor';
 
 export default class Startup {
     static init(): void {
+        Startup.configurationComponent();
         Startup.configurationHttp();
         Startup.configurationRouter();
     }
@@ -24,5 +27,9 @@ export default class Startup {
 
     private static configurationRouter() {
         SimpleNavigation.Init(router);
+    }
+
+    private static configurationComponent() {
+        Vue.use(MavonEditor);
     }
 }
