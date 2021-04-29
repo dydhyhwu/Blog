@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="full-height">
         <v-app-bar color="blue" app flat dark>
             <v-app-bar-title>心情题解の小秘密</v-app-bar-title>
         </v-app-bar>
@@ -11,9 +11,11 @@
                 </div>
             </template>
         </v-navigation-drawer>
-        <v-main>
-            <v-container>
-                <router-view></router-view>
+        <v-main class="main-content full-height">
+            <v-container fluid class="full-height">
+                <v-slide-y-reverse-transition>
+                    <router-view class="main-content-view pa-5"></router-view>
+                </v-slide-y-reverse-transition>
             </v-container>
         </v-main>
     </div>
@@ -31,3 +33,15 @@
         menu = AdminNavMenu;
     }
 </script>
+
+<style scoped>
+    .main-content {
+        background-color: #f0f2f5;
+    }
+    .main-content-view {
+        background-color: #fff;
+    }
+    .full-height {
+        height: 100% !important;
+    }
+</style>
