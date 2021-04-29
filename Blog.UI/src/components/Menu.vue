@@ -1,0 +1,39 @@
+<template>
+    <v-list>
+        <div v-for="(menuItem, index) in menu" :key="index">
+            <v-list-item v-if="!menuItem.children" :to="getRoute(menuItem)">
+                <v-list-item-icon v-if="menuItem.icon">
+                    <v-icon>{{ menuItem.icon }}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>{{ menuItem.title }}</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            <v-list-group v-else>
+                <template #activator>
+                    <v-list-item-title>{{ menuItem.title }}</v-list-item-title>
+                </template>
+                <MenuComponent :menu="menuItem.children"></MenuComponent>
+            </v-list-group>
+        </div>
+    </v-list>
+</template>
+
+<script lang="ts">
+    import { Vue, Component, Prop } from 'vue-property-decorator';
+    import { MenuItem } from '@/domain/menuItem';
+
+    @Component
+    export default class MenuComponent extends Vue {
+        @Prop() menu: MenuItem[];
+
+        getRoute(item: MenuItem) {
+            if (item.routeName) {
+                return {
+                    name: item.routeName,
+                };
+            }
+            return undefined;
+        }
+    }
+</script>
