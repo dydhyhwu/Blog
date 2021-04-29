@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <v-container>
         <div v-if="article">
-            <div>{{ article.title }}</div>
-            <v-divider></v-divider>
-            <div>
-                {{ article.content }}
+            <div class="text-center text-h4">
+                {{ article.title }}
             </div>
+            <v-divider class="my-5" inset></v-divider>
+            <markdown-view :value="article.content"></markdown-view>
         </div>
-    </div>
+    </v-container>
 </template>
 
 <script lang="ts">
@@ -17,11 +17,16 @@
     import { Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
     import { Article } from '@/models/Article';
+    import MarkdownView from '@/components/MarkdownView.vue';
 
     @RouteName(ArticleDetail)
     @Context('id')
     @EnableProp()
-    @Component
+    @Component({
+        components: {
+            MarkdownView,
+        },
+    })
     export default class ArticleDetailPage extends Vue {
         @Inject(Repository) repository: Repositories;
         @Prop() id: string;
