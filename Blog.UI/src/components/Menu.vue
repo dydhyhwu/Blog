@@ -1,5 +1,5 @@
 <template>
-    <v-list>
+    <v-list nav dense>
         <div v-for="(menuItem, index) in menu" :key="index">
             <v-list-item v-if="!menuItem.children" :to="getRoute(menuItem)">
                 <v-list-item-icon v-if="menuItem.icon">
@@ -9,7 +9,7 @@
                     <v-list-item-title>{{ menuItem.title }}</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
-            <v-list-group v-else>
+            <v-list-group v-else :prepend-icon="menuItem.icon">
                 <template #activator>
                     <v-list-item-title>{{ menuItem.title }}</v-list-item-title>
                 </template>

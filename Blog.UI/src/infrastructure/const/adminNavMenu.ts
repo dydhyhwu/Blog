@@ -8,16 +8,16 @@ export const AdminNavMenu: MenuItem[] = [
         routeName: AdminHome,
     },
     {
-        icon: 'mdi-content',
+        icon: 'mdi-table-of-contents',
         title: '内容管理',
         children: [
             {
-                icon: 'mdi-content',
+                icon: 'mdi-file-document',
                 title: '文章管理',
                 routeName: AddArticle,
             },
             {
-                icon: 'mdi-website',
+                icon: 'mdi-link',
                 title: '收藏链接',
                 routeName: AddFavoriteLink,
             },
