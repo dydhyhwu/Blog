@@ -1,5 +1,5 @@
 <template>
-    <div>123</div>
+    <div class="full-height">123</div>
 </template>
 
 <script lang="ts">

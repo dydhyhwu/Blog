@@ -41,7 +41,4 @@
     .main-content-view {
         background-color: #fff;
     }
-    .full-height {
-        height: 100% !important;
-    }
 </style>

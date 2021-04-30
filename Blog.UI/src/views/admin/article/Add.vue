@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="full-height">
         <v-responsive class="mx-2" max-width="300px">
             <v-text-field
                 v-model="article.title"

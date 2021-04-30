@@ -7,6 +7,7 @@ import SimpleNavigation from '@/infrastructure/navigator';
 import router from '@/router';
 import Vue from 'vue';
 import MavonEditor from 'mavon-editor';
+import '@/assets/style/common.css';
 
 export default class Startup {
     static init(): void {
