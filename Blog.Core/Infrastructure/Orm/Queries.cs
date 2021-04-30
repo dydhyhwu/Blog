@@ -10,5 +10,6 @@ namespace Blog.Core.Infrastructure.Orm
         Query<FavoriteLink> GetFavoriteLink(Guid id);
         Query<Article> GetArticle(Guid id);
         QueryByEntity<Article> GetArticles();
+        QueryByEntity<FavoriteLink> GetFavoriteLinks();
     }
 }

@@ -30,5 +30,13 @@ namespace Blog.Core.Infrastructure.Orm
                 return query;
             });
         }
+
+        public QueryByEntity<FavoriteLink> GetFavoriteLinks()
+        {
+            return QueryByEntity<FavoriteLink>.Of(query =>
+            {
+                return query;
+            });
+        }
     }
 }

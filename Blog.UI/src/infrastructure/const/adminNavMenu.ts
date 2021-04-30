@@ -1,5 +1,5 @@
 import { MenuItem } from '@/domain/menuItem';
-import { AddFavoriteLink, AdminHome, ArticleManage } from '@/domain/views';
+import { AdminHome, ArticleManage, LinkManage } from '@/domain/views';
 
 export const AdminNavMenu: MenuItem[] = [
     {
@@ -19,7 +19,7 @@ export const AdminNavMenu: MenuItem[] = [
             {
                 icon: 'mdi-link',
                 title: '收藏链接',
-                routeName: AddFavoriteLink,
+                routeName: LinkManage,
             },
         ],
     },

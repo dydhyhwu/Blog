@@ -1,4 +1,5 @@
 ﻿using System;
+using Blog.Core.Model;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using Blog.Core.Service;
@@ -26,6 +27,12 @@ namespace Blog.API.Controllers
         public void Add(FavoriteLinkAddInput addInput)
         {
             service.Add(addInput);
+        }
+
+        [HttpGet]
+        public PageList<FavoriteLinkOutput> List([FromQuery]PageListInput input)
+        {
+            return service.List(input);
         }
     }
 }

@@ -1,5 +1,7 @@
 import AxiosHttp from '@/infrastructure/http';
 import { FavoriteLink } from '@/models/FavoriteLink';
+import { Page } from '@/domain/page';
+import { PageData } from '@/models/Page';
 
 export class FavoriteLinkRepository {
     get(id: string) {
@@ -16,5 +18,12 @@ export class FavoriteLinkRepository {
             content: link.content,
         };
         return AxiosHttp.Instance.post('/FavoriteLink/Add', data);
+    }
+
+    List(page: Page) {
+        return AxiosHttp.Instance.get<PageData<FavoriteLink>>(
+            '/FavoriteLink/List',
+            page
+        );
     }
 }
