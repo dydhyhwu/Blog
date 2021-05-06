@@ -1,0 +1,7 @@
+const url = process.env.VUE_APP_API_URL;
+
+const config = {
+    Host: url,
+};
+
+export default config;
