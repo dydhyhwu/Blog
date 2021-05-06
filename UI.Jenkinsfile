@@ -20,7 +20,7 @@ pipeline {
       }
       stage('构建镜像') {
         steps {
-          sh "docker build -f UI.Dockerfile --build-arg VUE_APP_API_URL=/api -t ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} ."
+          sh "docker build -f UI.Dockerfile --build-arg VUE_APP_API_URL=/api -t ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} Blog.UI"
           sh "docker tag ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} ${DOCKER_REPOSITORY_NAME}:latest"
         }
       }
