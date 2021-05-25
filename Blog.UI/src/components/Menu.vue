@@ -13,7 +13,7 @@
                 <template #activator>
                     <v-list-item-title>{{ menuItem.title }}</v-list-item-title>
                 </template>
-                <MenuComponent :menu="menuItem.children"></MenuComponent>
+                <dynamic-menu :menu="menuItem.children"></dynamic-menu>
             </v-list-group>
         </div>
     </v-list>
@@ -24,7 +24,8 @@
     import { MenuItem } from '@/domain/menuItem';
 
     @Component
-    export default class MenuComponent extends Vue {
+    export default class DynamicMenu extends Vue {
+        static name = 'DynamicMenu';
         @Prop() menu: MenuItem[];
 
         getRoute(item: MenuItem) {
