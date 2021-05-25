@@ -25,7 +25,6 @@
 
     @Component
     export default class DynamicMenu extends Vue {
-        static name = 'DynamicMenu';
         @Prop() menu: MenuItem[];
 
         getRoute(item: MenuItem) {
