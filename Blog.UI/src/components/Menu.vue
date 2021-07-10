@@ -23,7 +23,9 @@
     import { Vue, Component, Prop } from 'vue-property-decorator';
     import { MenuItem } from '@/domain/menuItem';
 
-    @Component
+    @Component({
+        name: 'DynamicMenu'
+    })
     export default class DynamicMenu extends Vue {
         @Prop() menu: MenuItem[];
 
