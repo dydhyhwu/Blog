@@ -10,5 +10,7 @@ namespace Blog.Core.Service
         void Add(AddArticleInput input);
         ArticleViewOutput Get(Guid id);
         PageList<ArticleListItemOutput> List(PageListInput input);
+        ArticleEditOutput Detail(Guid id);
+        void Edit(ArticleEditInput input);
     }
 }

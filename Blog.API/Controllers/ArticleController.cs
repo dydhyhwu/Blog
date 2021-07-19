@@ -35,5 +35,17 @@ namespace Blog.API.Controllers
         {
             return service.List(input);
         }
+
+        [HttpGet]
+        public ArticleEditOutput Detail(Guid id)
+        {
+            return service.Detail(id);
+        }
+
+        [HttpPost]
+        public void Edit(ArticleEditInput input)
+        {
+            service.Edit(input);
+        }
     }
 }

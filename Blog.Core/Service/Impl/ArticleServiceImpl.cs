@@ -48,5 +48,17 @@ namespace Blog.Core.Service.Impl
                 Data = mapper.MapList<Article, ArticleListItemOutput>(articles),
             };
         }
+
+        public ArticleEditOutput Detail(Guid id)
+        {
+            var article = repository.GetSingle(queries.GetArticle(id));
+            return mapper.Map<ArticleEditOutput>(article);
+        }
+
+        public void Edit(ArticleEditInput input)
+        {
+            var article = mapper.Map<ArticleEditInput, Article>(input);
+            repository.Update(article);
+        }
     }
 }
