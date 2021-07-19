@@ -47,5 +47,11 @@ namespace Blog.API.Controllers
         {
             service.Edit(input);
         }
+
+        [HttpPost]
+        public void Delete(Guid id)
+        {
+            service.Delete(id);
+        }
     }
 }

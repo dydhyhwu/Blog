@@ -60,5 +60,11 @@ namespace Blog.Core.Service.Impl
             var article = mapper.Map<ArticleEditInput, Article>(input);
             repository.Update(article);
         }
+
+        public void Delete(Guid id)
+        {
+            var article = Article.Of(id);
+            repository.Remove(article);
+        }
     }
 }

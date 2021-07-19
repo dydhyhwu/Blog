@@ -12,5 +12,6 @@ namespace Blog.Core.Service
         PageList<ArticleListItemOutput> List(PageListInput input);
         ArticleEditOutput Detail(Guid id);
         void Edit(ArticleEditInput input);
+        void Delete(Guid id);
     }
 }
