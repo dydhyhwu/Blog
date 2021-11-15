@@ -9,6 +9,10 @@
   },
   "dependencies": {
     "@mdi/font": "^5.9.55",
+    "@milkdown/core": "^5.0.1",
+    "@milkdown/plugin-listener": "^5.0.1",
+    "@milkdown/preset-commonmark": "^5.0.1",
+    "@milkdown/theme-nord": "^5.0.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "mavon-editor": "^2.9.1",
