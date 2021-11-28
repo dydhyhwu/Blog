@@ -12,6 +12,12 @@ export interface Article {
     createTime?: string;
 }
 
+export interface ArticleEditModel {
+    id: string;
+    title: string;
+    content: string;
+}
+
 export enum ContentFormat {
     Markdown,
     Html,

@@ -436,3 +436,4 @@ MigrationBackup/
 
 appsettings.json
 Blog.UI/src/config/index.ts
+.idea/

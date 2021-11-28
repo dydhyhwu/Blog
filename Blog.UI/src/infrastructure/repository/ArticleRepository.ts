@@ -1,7 +1,7 @@
 import { Page } from '@/domain/page';
 import AxiosHttp from '@/infrastructure/http';
 import { PageData } from '@/models/Page';
-import { Article, ArticleListItem } from '@/models/Article';
+import { Article, ArticleEditModel, ArticleListItem } from '@/models/Article';
 
 export default class ArticleRepository {
     List(page: Page) {
@@ -20,5 +20,15 @@ export default class ArticleRepository {
 
     async Add(article: Article) {
         return AxiosHttp.Instance.post('/Article/Add', article);
+    }
+
+    async Detail(id: string): Promise<ArticleEditModel> {
+        const param = {
+            id: id,
+        };
+        return AxiosHttp.Instance.get<ArticleEditModel>(
+            '/Article/Detail',
+            param
+        );
     }
 }
