@@ -11,7 +11,7 @@
     export default class VEditorComponent extends Vue {
         @VModel({ type: String, default: '' }) content: string;
 
-        instance: any = null;
+        instance: Vditor | null = null;
 
         mounted() {
             this.init();
@@ -21,9 +21,16 @@
             this.instance = new Vditor('editor', {
                 icon: 'material',
                 value: this.content,
+                minHeight: 460,
+                placeholder: '',
 
                 input: (value) => this.onValueChanged(value),
+                after: () => this.afterInit(),
             });
+        }
+
+        private afterInit() {
+            this.instance.setValue('');
         }
 
         private onValueChanged(value: string) {
