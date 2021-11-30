@@ -17,6 +17,15 @@
             <template #item.options="{ item }">
                 <div>
                     <v-btn small text depressed @click="edit(item)">编辑</v-btn>
+                    <v-btn
+                        color="error"
+                        small
+                        text
+                        depressed
+                        @click="remove(item)"
+                    >
+                        删除
+                    </v-btn>
                 </div>
             </template>
         </v-data-table>
@@ -24,7 +33,7 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Inject } from 'vue-property-decorator';
+    import { Component, Inject } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { ArticleManage, AddArticle, EditArticle } from '@/domain/views';
     import { ArticleListItem } from '@/models/Article';
@@ -32,10 +41,12 @@
     import { Repository, Navigator } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
     import { Navigation } from '@/infrastructure/navigator';
+    import BasePage from '@/infrastructure/basePage';
+    import { Confirm, OnFinishedSuccess } from '@dydhyh/ui-tools';
 
     @RouteName(ArticleManage)
     @Component
-    export default class ArticleManagePage extends Vue {
+    export default class ArticleManagePage extends BasePage {
         @Inject(Repository) repository: Repositories;
         @Inject(Navigator) navigator: Navigation;
 
@@ -77,6 +88,13 @@
             this.navigator.redirect(EditArticle, {
                 id: item.id,
             });
+        }
+
+        @Confirm('是否删除,删除后不可恢复')
+        @OnFinishedSuccess('删除成功')
+        async remove(item: ArticleListItem): Promise<void> {
+            await this.repository.Article.Delete(item.id);
+            await this.init();
         }
     }
 </script>

@@ -35,4 +35,11 @@ export default class ArticleRepository {
     async Edit(model: ArticleEditModel): Promise<void> {
         return AxiosHttp.Instance.post('/Article/Edit', model);
     }
+
+    async Delete(id: string): Promise<void> {
+        const data = {
+            id: id,
+        };
+        return AxiosHttp.Instance.post('/Article/Delete', data);
+    }
 }

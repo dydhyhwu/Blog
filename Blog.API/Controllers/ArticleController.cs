@@ -49,9 +49,9 @@ namespace Blog.API.Controllers
         }
 
         [HttpPost]
-        public void Delete(Guid id)
+        public void Delete(ArticleDeleteInput input)
         {
-            service.Delete(id);
+            service.Delete(input.Id);
         }
     }
 }
