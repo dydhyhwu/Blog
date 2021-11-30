@@ -8,6 +8,9 @@ import router from '@/router';
 import Vue from 'vue';
 import MavonEditor from 'mavon-editor';
 import '@/assets/style/common.css';
+import UITools from '@dydhyh/ui-tools';
+import VuetifyTools from '@dydhyh/vuetify-tools';
+import Vuetify from '../plugins/vuetify';
 
 export default class Startup {
     static init(): void {
@@ -32,5 +35,9 @@ export default class Startup {
 
     private static configurationComponent() {
         Vue.use(MavonEditor);
+        Vue.use(UITools, {
+            deps: { vuetify: Vuetify },
+            components: VuetifyTools,
+        });
     }
 }

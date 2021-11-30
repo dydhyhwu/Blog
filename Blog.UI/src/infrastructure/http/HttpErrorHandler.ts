@@ -1,8 +1,8 @@
 import { HttpErrorHandler } from '.';
-import { Loader } from 'vuetify-extension';
+import { SimpleLoadingOperator } from '@dydhyh/ui-tools';
 
 export default class AxiosHttpErrorHandler implements HttpErrorHandler {
-  process(error: any): void {
-    Loader.CloseAll();
-  }
+    process(error: any): void {
+        SimpleLoadingOperator.Instance.closeAll();
+    }
 }

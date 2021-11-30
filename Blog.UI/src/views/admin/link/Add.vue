@@ -34,12 +34,12 @@
     import { FavoriteLink } from '@/models/FavoriteLink';
     import { Navigator, Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
-    import { Notification } from 'vuetify-extension';
     import { Navigation } from '@/infrastructure/navigator';
+    import BasePage from '@/infrastructure/basePage';
 
     @RouteName(AddFavoriteLink)
     @Component
-    export default class AddFavoriteLinkPage extends Vue {
+    export default class AddFavoriteLinkPage extends BasePage {
         @Inject(Repository) repository: Repositories;
         @Inject(Navigator) navigator: Navigation;
 
@@ -47,7 +47,7 @@
 
         async save() {
             await this.repository.FavoriteLink.add(this.link);
-            Notification.success('添加成功');
+            this.message.success('添加成功');
         }
     }
 </script>

@@ -15,14 +15,14 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject, Vue } from 'vue-property-decorator';
+    import { Component, Inject } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { AddArticle } from '@/domain/views';
     import { Article, ContentFormat } from '@/models/Article';
     import { Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
-    import { Notification } from 'vuetify-extension';
     import MarkdownEditor from '@/components/editor';
+    import BasePage from '@/infrastructure/basePage';
 
     @RouteName(AddArticle)
     @Component({
@@ -30,7 +30,7 @@
             MarkdownEditor,
         },
     })
-    export default class AddArticlePage extends Vue {
+    export default class AddArticlePage extends BasePage {
         @Inject(Repository) repository: Repositories;
 
         article: Article = {
@@ -41,7 +41,7 @@
 
         async save() {
             await this.repository.Article.Add(this.article);
-            Notification.success('保存成功');
+            this.message.success('保存成功');
         }
     }
 </script>
