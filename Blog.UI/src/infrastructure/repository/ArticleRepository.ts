@@ -31,4 +31,8 @@ export default class ArticleRepository {
             param
         );
     }
+
+    async Edit(model: ArticleEditModel): Promise<void> {
+        return AxiosHttp.Instance.post('/Article/Edit', model);
+    }
 }

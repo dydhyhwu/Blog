@@ -48,6 +48,7 @@
         }
 
         async save() {
+            await this.repository.Article.Edit(this.article);
             Notification.success('保存成功');
         }
     }

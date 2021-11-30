@@ -3,18 +3,22 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, VModel, Ref } from 'vue-property-decorator';
+    import { Vue, Component, VModel, Ref, Watch } from 'vue-property-decorator';
     import Vditor from 'vditor';
     import 'vditor/dist/index.css';
 
     @Component
     export default class VEditorComponent extends Vue {
-        @VModel({ type: String, default: '' }) content: string;
+        @VModel({ type: String, default: '' }) content!: string;
 
         instance: Vditor | null = null;
 
         mounted() {
             this.init();
+        }
+
+        @Watch('value', { immediate: true }) onValueInit() {
+            this.instance?.setValue(this.content);
         }
 
         private init() {
@@ -30,11 +34,10 @@
         }
 
         private afterInit() {
-            this.instance.setValue('');
+            this.instance?.setValue(this.content);
         }
 
         private onValueChanged(value: string) {
-            console.log(value);
             this.content = value;
         }
     }
