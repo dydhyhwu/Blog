@@ -5,7 +5,7 @@
                 {{ article.title }}
             </div>
             <v-divider class="my-5" inset></v-divider>
-            <markdown-view :value="article.content"></markdown-view>
+            <content-render :content="article.content"></content-render>
         </div>
     </v-container>
 </template>
@@ -17,14 +17,14 @@
     import { Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
     import { Article } from '@/models/Article';
-    import MarkdownView from '@/components/MarkdownView.vue';
+    import ContentRender from '@/components/render';
 
     @RouteName(ArticleDetail)
     @Context('id')
     @EnableProp()
     @Component({
         components: {
-            MarkdownView,
+            ContentRender,
         },
     })
     export default class ArticleDetailPage extends Vue {

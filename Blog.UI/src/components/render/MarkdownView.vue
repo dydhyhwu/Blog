@@ -17,7 +17,7 @@
 
     @Component
     export default class MarkdownView extends Vue {
-        @Prop() value;
+        @Prop() content;
 
         render = new MarkdownIt()
             .use(Emoji)
@@ -31,7 +31,7 @@
             .use(container);
 
         get renderContent() {
-            return this.render.render(this.value);
+            return this.render.render(this.content);
         }
     }
 </script>
