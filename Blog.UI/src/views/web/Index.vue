@@ -39,6 +39,7 @@
                 </v-col>
                 <v-col cols="3">
                     <v-card class="mb-3" min-height="25vh">
+                        <v-img class="fill-height" :src="rightImg"></v-img>
                         <v-card-subtitle>若羽</v-card-subtitle>
                     </v-card>
                     <v-card class="mb-3" min-height="25vh">
@@ -104,6 +105,8 @@
     export default class HomePage extends Vue {
         @Inject(Repository) repository: Repositories;
         @Inject(Navigator) navigator: Navigation;
+
+        rightImg = require('@/assets/images/right.jpg');
 
         page: Page = new Page();
         articles: ArticleListItem[] = [];
