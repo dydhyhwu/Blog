@@ -1,92 +1,91 @@
 <template>
     <div class="fill-height">
-        <v-app-bar color="white" app flat>心情题解</v-app-bar>
-        <v-main class="grey lighten-3 fill-height">
-            <v-container>
-                <v-row>
-                    <v-col cols="2">
-                        <v-sheet rounded>
-                            <v-list color="transparent">
+        <v-container>
+            <v-row>
+                <v-col>
+                    <v-card
+                        v-for="(article, index) in articles"
+                        :key="index"
+                        class="mb-2"
+                        width="60vw"
+                        min-height="17vh"
+                    >
+                        <v-card-title @click="detail(article.id)">
+                            {{ article.title }}
+                        </v-card-title>
+                        <v-card-subtitle>
+                            {{ article.title }}
+                        </v-card-subtitle>
+                        <v-divider class="mx-auto" inset></v-divider>
+                        <v-card-actions class="mx-4">
+                            <v-avatar color="primary" size="25">
+                                <span class="white--text">y</span>
+                            </v-avatar>
+                            <span class="caption mx-1">wjy</span>
+                            <span class="caption mx-1">
+                                {{ article.createTime }}
+                            </span>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                class="button"
+                                color="primary"
+                                text
+                                @click="detail(article.id)"
+                            >
+                                阅读全文>
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+                <v-col cols="3">
+                    <v-card class="mb-3" min-height="25vh">
+                        <v-card-subtitle>若羽</v-card-subtitle>
+                    </v-card>
+                    <v-card class="mb-3" min-height="25vh">
+                        <v-card-subtitle>
+                            <v-icon>mdi-folder</v-icon>
+                            分类
+                        </v-card-subtitle>
+
+                        <v-list dense>
+                            <v-list-item-group>
                                 <v-list-item>
+                                    <v-list-item-icon>
+                                        <v-icon>mdi-folder-outline</v-icon>
+                                    </v-list-item-icon>
                                     <v-list-item-content>
-                                        <v-list-item-title>
-                                            分类1
-                                        </v-list-item-title>
+                                        分类1
+                                    </v-list-item-content>
+                                    <v-list-item-icon>
+                                        <v-chip label>1</v-chip>
+                                    </v-list-item-icon>
+                                </v-list-item>
+                            </v-list-item-group>
+                        </v-list>
+                    </v-card>
+
+                    <v-card class="mb-3" min-height="30vh">
+                        <v-card-subtitle>
+                            <v-icon>mdi-folder</v-icon>
+                            最新文章
+                        </v-card-subtitle>
+
+                        <v-list dense>
+                            <v-list-item-group>
+                                <v-list-item>
+                                    <v-list-item-icon>
+                                        <v-icon>mdi-folder-outline</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        文章1
                                     </v-list-item-content>
                                 </v-list-item>
-
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            分类2
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-list>
-                        </v-sheet>
-                    </v-col>
-                    <v-col>
-                        <v-card
-                            v-for="(article, index) in articles"
-                            :key="index"
-                            class="my-2"
-                        >
-                            <v-container>
-                                <v-row>
-                                    <v-col cols="auto">
-                                        <v-img>
-                                            <v-avatar
-                                                color="primary"
-                                                tile
-                                                size="68"
-                                            >
-                                                <span
-                                                    class="white--text headline"
-                                                >
-                                                    暂无图片
-                                                </span>
-                                            </v-avatar>
-                                        </v-img>
-                                    </v-col>
-                                    <v-col align-self="center">
-                                        <div
-                                            class="title"
-                                            @click="detail(article.id)"
-                                        >
-                                            {{ article.title }}
-                                        </div>
-                                        <v-divider></v-divider>
-                                        <div class="grey--text overline">
-                                            <v-icon class="mx-1" small>
-                                                mdi-calendar-clock
-                                            </v-icon>
-                                            <span>
-                                                {{ article.createTime }}
-                                            </span>
-
-                                            <v-icon class="mx-1" small>
-                                                mdi-eye
-                                            </v-icon>
-                                            <span>888</span>
-
-                                            <v-icon class="mx-1" small>
-                                                mdi-folder-open
-                                            </v-icon>
-                                            <span>分类1</span>
-
-                                            <v-icon class="mx-1" small>
-                                                mdi-tag-multiple
-                                            </v-icon>
-                                            <span>标签1,标签2,标签3</span>
-                                        </div>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-card>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </v-main>
+                            </v-list-item-group>
+                        </v-list>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-container>
     </div>
 </template>
 
