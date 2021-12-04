@@ -19,9 +19,10 @@
 </template>
 
 <script>
-    export default {
-        name: 'Layout',
-    };
+    import { Component, Vue } from 'vue-property-decorator';
+
+    @Component
+    export default class WebLayout extends Vue {}
 </script>
 
 <style scoped></style>
