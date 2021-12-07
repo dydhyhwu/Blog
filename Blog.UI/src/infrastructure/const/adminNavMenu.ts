@@ -1,5 +1,10 @@
 import { MenuItem } from '@/domain/menuItem';
-import { AdminHome, ArticleManage, LinkManage } from '@/domain/views';
+import {
+    AdminHome,
+    ArticleManage,
+    CategoryManage,
+    LinkManage,
+} from '@/domain/views';
 
 export const AdminNavMenu: MenuItem[] = [
     {
@@ -22,5 +27,10 @@ export const AdminNavMenu: MenuItem[] = [
                 routeName: LinkManage,
             },
         ],
+    },
+    {
+        icon: 'mdi-table-of-contents',
+        title: '类别管理',
+        routeName: CategoryManage,
     },
 ];

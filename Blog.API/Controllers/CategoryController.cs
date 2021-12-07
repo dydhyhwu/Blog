@@ -16,7 +16,7 @@ namespace Blog.API.Controllers
             this.service = service;
         }
 
-        [HttpGet]
+        [HttpPost]
         public void Add(AddCategoryInput input)
         {
             service.Add(input);
