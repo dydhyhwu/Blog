@@ -5,7 +5,7 @@ COPY . .
 COPY /src/config/index.ts.docker ./src/config/index.ts
 ARG VUE_APP_API_URL
 ENV VUE_APP_API_URL $VUE_APP_API_URL
-RUN npm install --registry=https://registry.npm.taobao.org 
+RUN npm install
 RUN npm run build
 
 # production stage
