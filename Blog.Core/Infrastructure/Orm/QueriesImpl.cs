@@ -38,5 +38,26 @@ namespace Blog.Core.Infrastructure.Orm
                 return query;
             });
         }
+
+        public Query<Category> GetCategoryBy(string name)
+        {
+            return QueryByEntity<Category>.Of(query =>
+            {
+                return query.Where(x => x.Name == name);
+            });
+        }
+
+        public QueryByEntity<Category> GetCategories()
+        {
+            return QueryByEntity<Category>.Of(query => query);
+        }
+
+        public Query<Category> GetCategoryBy(Guid id)
+        {
+            return QueryByEntity<Category>.Of(query =>
+            {
+                return query.Where(x => x.Id == id);
+            });
+        }
     }
 }

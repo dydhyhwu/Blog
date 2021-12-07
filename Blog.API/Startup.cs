@@ -56,7 +56,7 @@ namespace Blog.API
 
             services.AddAutoMapper(typeof(BlogRepository).Assembly);
 
-            #region ÒÀÀµ×¢Èë
+            #region ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
 
             services.AddScoped<Repository, BlogRepository>();
             services.AddDbContext<BlogContext>(options =>
@@ -74,6 +74,7 @@ namespace Blog.API
             services.AddScoped<FavoriteLinkService, FavoriteLinkServiceImpl>();
             services.AddScoped<Queries, QueriesImpl>();
             services.AddScoped<ArticleService, ArticleServiceImpl>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             #endregion
         }

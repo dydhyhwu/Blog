@@ -11,5 +11,8 @@ namespace Blog.Core.Infrastructure.Orm
         Query<Article> GetArticle(Guid id);
         QueryByEntity<Article> GetArticles();
         QueryByEntity<FavoriteLink> GetFavoriteLinks();
+        Query<Category> GetCategoryBy(string name);
+        QueryByEntity<Category> GetCategories();
+        Query<Category> GetCategoryBy(Guid id);
     }
 }
