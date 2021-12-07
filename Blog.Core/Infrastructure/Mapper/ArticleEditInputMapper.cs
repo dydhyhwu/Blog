@@ -12,7 +12,8 @@ namespace Blog.Core.Infrastructure.Mapper
             {
                 Id = source.Id,
                 Title = source.Title,
-                Value = source.Content
+                Value = source.Content,
+                Categories = source.Categories
             };
             return destination;
         }
