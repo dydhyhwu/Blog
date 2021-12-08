@@ -17,8 +17,10 @@
             this.init();
         }
 
-        @Watch('value', { immediate: true }) onValueInit() {
-            this.instance?.setValue(this.content);
+        @Watch('value', { immediate: true })
+        onValueInit() {
+            if (this.instance?.getValue() === this.content) return;
+            this.instance?.updateValue(this.content);
         }
 
         private init() {
@@ -28,13 +30,17 @@
                 minHeight: 460,
                 placeholder: '',
 
+                cache: {
+                    enable: false,
+                },
+
                 input: (value) => this.onValueChanged(value),
                 after: () => this.afterInit(),
             });
         }
 
         private afterInit() {
-            this.instance?.setValue(this.content);
+            this.instance?.updateValue(this.content);
         }
 
         private onValueChanged(value: string) {
