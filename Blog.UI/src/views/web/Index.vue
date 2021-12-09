@@ -48,20 +48,19 @@
                             分类
                         </v-card-subtitle>
 
-                        <v-list dense>
-                            <v-list-item-group>
-                                <v-list-item>
-                                    <v-list-item-icon>
-                                        <v-icon>mdi-folder-outline</v-icon>
-                                    </v-list-item-icon>
-                                    <v-list-item-content>
-                                        分类1
-                                    </v-list-item-content>
-                                    <v-list-item-icon>
-                                        <v-chip label>1</v-chip>
-                                    </v-list-item-icon>
-                                </v-list-item>
-                            </v-list-item-group>
+                        <v-list dense rounded>
+                            <v-list-item
+                                v-for="(category, index) in categories"
+                                :key="index"
+                                link
+                            >
+                                <v-list-item-icon>
+                                    <v-icon>mdi-folder-outline</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    {{ category.name }}
+                                </v-list-item-content>
+                            </v-list-item>
                         </v-list>
                     </v-card>
 
@@ -71,17 +70,13 @@
                             最新文章
                         </v-card-subtitle>
 
-                        <v-list dense>
-                            <v-list-item-group>
-                                <v-list-item>
-                                    <v-list-item-icon>
-                                        <v-icon>mdi-folder-outline</v-icon>
-                                    </v-list-item-icon>
-                                    <v-list-item-content>
-                                        文章1
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-list-item-group>
+                        <v-list dense rounded>
+                            <v-list-item>
+                                <v-list-item-icon>
+                                    <v-icon>mdi-folder-outline</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>文章1</v-list-item-content>
+                            </v-list-item>
                         </v-list>
                     </v-card>
                 </v-col>
@@ -99,6 +94,7 @@
     import { Page } from '@/domain/page';
     import { ArticleListItem } from '@/models/Article';
     import { Navigation } from '@/infrastructure/navigator';
+    import { Category } from '@/domains/Category';
 
     @RouteName(Home)
     @Component
@@ -110,22 +106,31 @@
 
         page: Page = new Page();
         articles: ArticleListItem[] = [];
+        categories: Category[] = [];
 
         mounted(): void {
             this.init();
         }
 
-        async init() {
+        async init(): Promise<void> {
             let response = await this.repository.Article.List(this.page);
             this.page.count = response.count;
             this.page.page = response.page;
             this.articles = response.data;
+
+            this.loadCategories();
         }
 
-        detail(id: string) {
+        detail(id: string): void {
             this.navigator.redirect(ArticleDetail, {
                 id: id,
             });
+        }
+
+        private async loadCategories(): Promise<void> {
+            const query = new Page();
+            const data = await this.repository.Category.List(query);
+            this.categories = data.data;
         }
     }
 </script>
