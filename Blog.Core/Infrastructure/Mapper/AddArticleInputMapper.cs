@@ -13,6 +13,7 @@ namespace Blog.Core.Infrastructure.Mapper
                 Title = source.Title,
                 Format = source.Format,
                 Value = source.Content,
+                Categories = string.Join(',', source.Categories)
             };
             return destination;
         }

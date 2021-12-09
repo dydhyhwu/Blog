@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Model.Input;
 
@@ -13,7 +14,7 @@ namespace Blog.Core.Infrastructure.Mapper
                 Id = source.Id,
                 Title = source.Title,
                 Value = source.Content,
-                Categories = source.Categories
+                Categories = string.Join(',', source.Categories)
             };
             return destination;
         }

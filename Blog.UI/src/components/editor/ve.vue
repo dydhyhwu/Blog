@@ -13,7 +13,8 @@
 
         instance: Vditor | null = null;
 
-        mounted() {
+        async mounted() {
+            await this.$nextTick();
             this.init();
         }
 

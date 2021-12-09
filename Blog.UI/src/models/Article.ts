@@ -8,6 +8,7 @@ export interface Article {
     id?: string;
     title: string;
     content: string;
+    categories: string[];
     format?: ContentFormat;
     createTime?: string;
 }
@@ -16,6 +17,7 @@ export interface ArticleEditModel {
     id: string;
     title: string;
     content: string;
+    categories: string[];
 }
 
 export enum ContentFormat {

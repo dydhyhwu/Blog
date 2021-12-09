@@ -27,7 +27,7 @@ namespace Blog.Core.Infrastructure.Orm
         {
             return QueryByEntity<Article>.Of(query =>
             {
-                return query;
+                return query.OrderByDescending(x => x.CreateTime);
             });
         }
 

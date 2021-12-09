@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Model.Output;
 
@@ -12,7 +13,8 @@ namespace Blog.Core.Infrastructure.Mapper
             {
                 Id = source.Id,
                 Title = source.Title,
-                Content = source.Value
+                Content = source.Value,
+                Categories = string.IsNullOrEmpty(source.Categories) ? new List<string>() : source.Categories.Split(',')
             };
             return destination;
         }
