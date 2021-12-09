@@ -1,6 +1,6 @@
 <template>
     <div class="full-height">
-        <v-app-bar hide-on-scroll dense app>
+        <v-app-bar color="primary" hide-on-scroll dense app dark>
             <v-toolbar-title>心情题解</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn text>
