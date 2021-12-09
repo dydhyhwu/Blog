@@ -1,9 +1,10 @@
 <template>
     <div class="full-height">
-        <v-app-bar color="blue" app flat dark>
+        <v-app-bar color="blue" app flat clipped-left dark>
+            <v-app-bar-nav-icon @click="toggleNav"></v-app-bar-nav-icon>
             <v-app-bar-title>心情题解の小秘密</v-app-bar-title>
         </v-app-bar>
-        <v-navigation-drawer app>
+        <v-navigation-drawer v-model="navVisible" app clipped hide-overlay>
             <Menu :menu="menu"></Menu>
             <template #append>
                 <div class="ma-2">
@@ -30,7 +31,12 @@
         components: { Menu },
     })
     export default class AdminLayoutPageComponent extends Vue {
-        menu = AdminNavMenu;
+        readonly menu = AdminNavMenu;
+        navVisible = false;
+
+        toggleNav(): void {
+            this.navVisible = !this.navVisible;
+        }
     }
 </script>
 
