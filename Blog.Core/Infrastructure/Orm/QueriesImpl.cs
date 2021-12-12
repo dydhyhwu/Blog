@@ -67,5 +67,10 @@ namespace Blog.Core.Infrastructure.Orm
                 return query.Where(x => x.Id == id);
             });
         }
+
+        public QueryByEntity<TencentCloudAccount> GetCLoudAccount()
+        {
+            return QueryByEntity<TencentCloudAccount>.Of(query => query);
+        }
     }
 }

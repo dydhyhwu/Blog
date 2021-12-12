@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 
@@ -10,5 +11,6 @@ namespace Blog.Core.Service
         void Edit(EditCloudAccountInput input);
         CloudAccountOutput Detail(Guid id);
         void Delete(Guid id);
+        IList<CloudAccountListOutput> List();
     }
 }

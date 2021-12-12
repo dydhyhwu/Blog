@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using Blog.Core.Service;
@@ -59,6 +60,16 @@ namespace Blog.API.Controllers
         public void Delete(DeleteCloudAccountInput input)
         {
             service.Delete(input.Id);
+        }
+
+        /// <summary>
+        /// 获取所有云账号
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IList<CloudAccountListOutput> List()
+        {
+            return service.List();
         }
     }
 }

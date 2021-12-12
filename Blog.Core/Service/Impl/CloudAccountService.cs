@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
+using YH.Arch.Infrastructure.Extension;
 using YH.Arch.Infrastructure.ORM;
 
 namespace Blog.Core.Service.Impl
@@ -11,11 +15,13 @@ namespace Blog.Core.Service.Impl
     {
         private readonly Repository repository;
         private readonly Queries queries;
+        private readonly IMapper mapper;
 
-        public CloudAccountService(Repository repository, Queries queries)
+        public CloudAccountService(Repository repository, Queries queries, IMapper mapper)
         {
             this.repository = repository;
             this.queries = queries;
+            this.mapper = mapper;
         }
 
         public void Add(AddCloudAccountInput input)
@@ -57,6 +63,12 @@ namespace Blog.Core.Service.Impl
         {
             var account = GetAccount(id);
             repository.Remove(account);
+        }
+
+        public IList<CloudAccountListOutput> List()
+        {
+            var list = repository.GetMulti(queries.GetCLoudAccount()).ToList();
+            return mapper.MapList<TencentCloudAccount, CloudAccountListOutput>(list);
         }
 
         private TencentCloudAccount GetAccount(Guid id)
