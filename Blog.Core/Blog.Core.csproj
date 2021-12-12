@@ -13,4 +13,8 @@
     <Folder Include="Service\Impl\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Tencent.QCloud.Cos.Sts.Sdk" Version="3.0.4" />
+  </ItemGroup>
+
 </Project>

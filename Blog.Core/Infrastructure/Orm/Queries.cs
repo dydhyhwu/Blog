@@ -14,5 +14,6 @@ namespace Blog.Core.Infrastructure.Orm
         Query<Category> GetCategoryBy(string name);
         QueryByEntity<Category> GetCategories();
         Query<Category> GetCategoryBy(Guid id);
+        QueryByEntity<TencentCloudAccount> GetCloudAccountBy(Guid id);
     }
 }

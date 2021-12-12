@@ -75,6 +75,7 @@ namespace Blog.API
             services.AddScoped<Queries, QueriesImpl>();
             services.AddScoped<ArticleService, ArticleServiceImpl>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICosService, CosService>();
 
             #endregion
         }
