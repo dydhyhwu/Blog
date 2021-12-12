@@ -4,7 +4,7 @@ namespace Blog.Core.Domain
 {
     public class CosProvider : BaseEntity
     {
-        public TencentCloudAccount Account { get; set; }
+        public virtual TencentCloudAccount Account { get; set; }
         public string Region { get; set; }
         public string BucketName { get; set; }
         public int Duration { get; set; }
