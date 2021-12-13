@@ -33,10 +33,7 @@ namespace Blog.Core.Infrastructure.Orm
 
         public QueryByEntity<FavoriteLink> GetFavoriteLinks()
         {
-            return QueryByEntity<FavoriteLink>.Of(query =>
-            {
-                return query;
-            });
+            return QueryByEntity<FavoriteLink>.Of(query => query);
         }
 
         public Query<Category> GetCategoryBy(string name)
@@ -70,7 +67,17 @@ namespace Blog.Core.Infrastructure.Orm
 
         public QueryByEntity<TencentCloudAccount> GetCLoudAccount()
         {
-            return QueryByEntity<TencentCloudAccount>.Of(query => query);
+            return QueryByEntity<TencentCloudAccount>.Of(query => query.OrderByDescending(x => x.CreateTime));
+        }
+
+        public Query<CosProvider> GetCosProviderBy(Guid id)
+        {
+            return QueryByEntity<CosProvider>.Of(query => query.Where(x => x.Id == id));
+        }
+
+        public Query<CosProvider> GetCosProvider()
+        {
+            return QueryByEntity<CosProvider>.Of(query => query.OrderByDescending(x => x.CreateTime));
         }
     }
 }
