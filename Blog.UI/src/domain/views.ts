@@ -8,3 +8,5 @@ export const ArticleManage = 'ArticleManage';
 export const LinkManage = 'LinkManage';
 export const EditArticle = 'EditArticle';
 export const CategoryManage = 'CategoryManage';
+export const CloudAccountManage = 'CloudAccountManage';
+export const CloudProviderManage = 'CloudProviderManage';
