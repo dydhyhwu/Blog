@@ -77,6 +77,7 @@ namespace Blog.API
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICosService, CosService>();
             services.AddScoped<ICloudProviderService, CloudProviderService>();
+            services.AddScoped<ICloudAccountService, CloudAccountService>();
 
             #endregion
         }
