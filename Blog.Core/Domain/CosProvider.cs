@@ -46,14 +46,14 @@ namespace Blog.Core.Domain
         /// name/cos:PutObject
         /// </summary>
         [Description("简单上传")]
-        NormalUpload,
+        NormalUpload = 0,
         
         /// <summary>
         /// 包含以下权限：
         /// name/cos:PostObject
         /// </summary>
         [Description("表单、小程序上传")]
-        FormOrMiniUpload,
+        FormOrMiniUpload = 1,
         
         /// <summary>
         /// 包含以下权限：
@@ -64,6 +64,6 @@ namespace Blog.Core.Domain
         /// name/cos:CompleteMultipartUpload
         /// </summary>
         [Description("分块上传")]
-        MultipartUpload
+        MultipartUpload = 2
     }
 }

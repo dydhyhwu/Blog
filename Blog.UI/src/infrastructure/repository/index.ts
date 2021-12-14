@@ -2,8 +2,10 @@ import { FavoriteLinkRepository } from '@/infrastructure/repository/FavoriteLink
 import ArticleRepository from '@/infrastructure/repository/ArticleRepository';
 import CategoryRepository from '@/infrastructure/repository/CategoryRepository';
 import CloudAccountRepository from './CloudAccountRepository';
+import CosProviderRepository from './CosProviderRepository';
 
 export interface Repositories {
+    CosProvider: CosProviderRepository;
     CloudAccount: CloudAccountRepository;
     Category: CategoryRepository;
     FavoriteLink: FavoriteLinkRepository;
@@ -15,4 +17,5 @@ export default class RepositoryImpl implements Repositories {
     FavoriteLink: FavoriteLinkRepository = new FavoriteLinkRepository();
     Article: ArticleRepository = new ArticleRepository();
     CloudAccount = new CloudAccountRepository();
+    CosProvider: CosProviderRepository = new CosProviderRepository();
 }
