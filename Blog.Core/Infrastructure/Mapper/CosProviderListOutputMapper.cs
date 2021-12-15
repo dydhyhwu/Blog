@@ -20,6 +20,7 @@ namespace Blog.Core.Infrastructure.Mapper
                 BucketName = source.BucketName,
                 Duration = source.Duration,
                 AllowPrefix = source.AllowPrefix,
+                AllowActions = actions.ToList(),
             };
             return destination;
         }

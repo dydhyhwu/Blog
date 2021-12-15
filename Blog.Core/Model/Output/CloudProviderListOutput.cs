@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Blog.Core.Domain;
 
 namespace Blog.Core.Model.Output
 {
@@ -10,5 +12,6 @@ namespace Blog.Core.Model.Output
         public string BucketName { get; set; }
         public int Duration { get; set; }
         public string AllowPrefix { get; set; }
+        public IList<TencentStsAction> AllowActions { get; set; }
     }
 }

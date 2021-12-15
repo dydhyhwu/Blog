@@ -58,14 +58,13 @@
                         placeholder="如：abc/*,photos/*"
                     ></v-text-field>
 
-                    <v-combobox
+                    <v-select
                         v-model="addItem.allowActions"
                         :items="actions"
-                        item-value="value"
                         label="操作权限"
                         multiple
                         small-chips
-                    ></v-combobox>
+                    ></v-select>
                 </v-card-text>
 
                 <v-card-actions>
@@ -176,6 +175,7 @@
 
         @OnFinishedSuccess('添加成功')
         async submit(): Promise<void> {
+            this.addItem.accountId = this.curAccount.id;
             await this.repository.CosProvider.Add(this.addItem);
             this.addItem = {
                 accountId: '',
