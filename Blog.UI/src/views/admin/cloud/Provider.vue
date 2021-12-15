@@ -13,6 +13,13 @@
                     <div></div>
                 </v-row>
             </template>
+            <template #item.options="{ item }">
+                <div>
+                    <v-btn color="error" text depressed @click="remove(item)">
+                        删除
+                    </v-btn>
+                </div>
+            </template>
         </v-data-table>
 
         <v-dialog v-model="addDialog" persistent width="40%">
@@ -90,7 +97,7 @@
         CosProviderListItem,
         StsClientAction,
     } from '../../../models/Cloud';
-    import { OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
+    import { Confirm, OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
 
     @RouteName(CloudProviderManage)
     @Component
@@ -188,6 +195,13 @@
 
             this.addDialog = false;
 
+            this.getProviderList();
+        }
+
+        @Confirm('是否删除，删除后不可恢复')
+        @OnFinishedSuccess('删除成功')
+        async remove(item: CosProviderListItem): Promise<void> {
+            await this.repository.CosProvider.Remove(item.id);
             this.getProviderList();
         }
     }

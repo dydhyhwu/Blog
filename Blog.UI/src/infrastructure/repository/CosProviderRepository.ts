@@ -9,4 +9,11 @@ export default class CosProviderRepository {
     async Add(data: AddCosProvider): Promise<void> {
         return AxiosHttp.Instance.post('/CloudProvider/Add', data);
     }
+
+    async Remove(id: string): Promise<void> {
+        const data = {
+            id: id,
+        };
+        return AxiosHttp.Instance.post('/CloudProvider/Delete', data);
+    }
 }
