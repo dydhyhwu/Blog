@@ -46,5 +46,16 @@ namespace Blog.API.Controllers
         {
             return service.List();
         }
+        
+
+        /// <summary>
+        /// 设置激活的存储桶
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpPost]
+        public void Enable([FromQuery]Guid id)
+        {
+            service.SetEnable(id);
+        }
     }
 }

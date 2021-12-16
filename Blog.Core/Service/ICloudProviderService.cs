@@ -12,5 +12,6 @@ namespace Blog.Core.Service
         void Edit(EditCloudProviderInput input);
         CloudProviderOutput Detail(Guid id);
         IList<CloudProviderListOutput> List();
+        void SetEnable(Guid id);
     }
 }

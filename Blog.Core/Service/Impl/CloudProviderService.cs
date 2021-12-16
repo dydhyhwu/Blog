@@ -71,7 +71,8 @@ namespace Blog.Core.Service.Impl
                 BucketName = provider.BucketName,
                 Duration = provider.Duration,
                 AllowPrefix = provider.AllowPrefix,
-                AllowActions = actions.ToList()
+                AllowActions = actions.ToList(),
+                Enable = provider.Enable
             };
         }
 
@@ -79,6 +80,21 @@ namespace Blog.Core.Service.Impl
         {
             var list = repository.GetMulti(queries.GetCosProvider()).ToList();
             return mapper.MapList<CosProvider, CloudProviderListOutput>(list);
+        }
+
+        public void SetEnable(Guid id)
+        {
+            var query = queries.GetEnableCosProvider();
+            if (repository.Existed(query))
+            {
+                var enableProvider = repository.GetSingle(query);
+                enableProvider.IsDisable();
+                repository.Update(enableProvider);
+            }
+
+            var provider = repository.GetSingle(queries.GetCosProviderBy(id));
+            provider.IsEnable();
+            repository.Update(provider);
         }
 
         private CosProvider GetProvider(Guid id)

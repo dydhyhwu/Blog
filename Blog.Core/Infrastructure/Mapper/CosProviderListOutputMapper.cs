@@ -21,6 +21,7 @@ namespace Blog.Core.Infrastructure.Mapper
                 Duration = source.Duration,
                 AllowPrefix = source.AllowPrefix,
                 AllowActions = actions.ToList(),
+                Enable = source.Enable
             };
             return destination;
         }

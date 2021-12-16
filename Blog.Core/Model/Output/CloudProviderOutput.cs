@@ -13,5 +13,6 @@ namespace Blog.Core.Model.Output
         public int Duration { get; set; }
         public string AllowPrefix { get; set; }
         public IList<TencentStsAction> AllowActions { get; set; }
+        public bool Enable { get; set; }
     }
 }

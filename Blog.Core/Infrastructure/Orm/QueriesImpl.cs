@@ -79,5 +79,10 @@ namespace Blog.Core.Infrastructure.Orm
         {
             return QueryByEntity<CosProvider>.Of(query => query.OrderByDescending(x => x.CreateTime));
         }
+
+        public Query<CosProvider> GetEnableCosProvider()
+        {
+            return QueryByEntity<CosProvider>.Of(query => query.Where(x => x.Enable == true));
+        }
     }
 }

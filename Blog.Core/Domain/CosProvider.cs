@@ -34,6 +34,21 @@ namespace Blog.Core.Domain
         /// 临时授权凭证允许的操作
         /// </summary>
         public string AllowActions { get; set; }
+
+        /// <summary>
+        /// 是否启用，只能有一个处于启用状态
+        /// </summary>
+        public bool Enable { get; set; } = false;
+
+        public virtual void IsDisable()
+        {
+            Enable = false;
+        }
+
+        public void IsEnable()
+        {
+            Enable = true;
+        }
     }
 
     /// <summary>
