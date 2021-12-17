@@ -1,6 +1,7 @@
 import COS from 'cos-js-sdk-v5';
 import CosProviderRepository from './repository/CosProviderRepository';
 import { BucketConfig } from '../domain/BucketConfig';
+import dayjs from 'dayjs';
 
 class CosService {
     private config: BucketConfig = { bucket: '', region: '' };
@@ -20,12 +21,15 @@ class CosService {
     async multiUpload(files: File[]): Promise<string[]> {
         this.config = await new CosProviderRepository().GetConfig();
         const file = files[0];
+        const file_name = `${dayjs().format('YYYY-MM-DD-HH-mm-ss')}-${
+            file.name
+        }`;
         return new Promise<string[]>((resolve, reject) => {
             this.instance.putObject(
                 {
                     Bucket: this.config.bucket,
                     Region: this.config.region,
-                    Key: 'images/test.jpg',
+                    Key: `images/${file_name}`,
                     Body: file,
                 },
                 (err, data) => {
