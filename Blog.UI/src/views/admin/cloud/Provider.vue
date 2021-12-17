@@ -20,6 +20,18 @@
                     <div></div>
                 </v-row>
             </template>
+            <template #item.allowActions="{ item }">
+                <div>
+                    <v-chip
+                        class="mx-1 primary"
+                        v-for="(action, index) in getActions(item)"
+                        :key="index"
+                        small
+                    >
+                        {{ action }}
+                    </v-chip>
+                </div>
+            </template>
             <template #item.enable="{ item }">
                 <v-icon :color="getStatusColor(item)">mdi-circle</v-icon>
             </template>
@@ -237,6 +249,24 @@
         async setEnable(item: CosProviderListItem): Promise<void> {
             await this.repository.CosProvider.SetEnable(item.id);
             this.getProviderList();
+        }
+
+        getActions(item: CosProviderListItem): string[] {
+            let result: string[] = [];
+            for (const allowAction of item.allowActions) {
+                switch (allowAction) {
+                    case StsClientAction.NormalUpload:
+                        result.push('简单上传');
+                        break;
+                    case StsClientAction.FormOrMiniUpload:
+                        result.push('表单、小程序上传');
+                        break;
+                    case StsClientAction.MultipartUpload:
+                        result.push('分片上传');
+                        break;
+                }
+            }
+            return result;
         }
     }
 </script>
