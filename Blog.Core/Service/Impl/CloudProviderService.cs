@@ -109,9 +109,26 @@ namespace Blog.Core.Service.Impl
             var result = cosService.GetTempToken(config.AsDictionary());
             return new TempCredentialOutput()
             {
+                Bucket = config.Bucket,
+                Region = config.Region,
                 Token = result.Credentials.Token,
                 SecretId = result.Credentials.TmpSecretId,
-                SecretKey = result.Credentials.TmpSecretKey
+                SecretKey = result.Credentials.TmpSecretKey,
+                StartTime = result.StartTime,
+                ExpiredTime = result.ExpiredTime
+            };
+        }
+
+        public CosProviderConfigOutput GetEnableProviderConfig()
+        {
+            var query = queries.GetEnableCosProvider();
+            if (!repository.Existed(query)) throw new BusinessException("未设置默认存储，请先设置默认存储！");
+            var provider = repository.GetSingle(query);
+            var config = provider.GenerateConfig();
+            return new CosProviderConfigOutput()
+            {
+                Bucket = config.Bucket,
+                Region = config.Region,
             };
         }
 

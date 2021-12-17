@@ -3,9 +3,17 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, VModel, Ref, Watch } from 'vue-property-decorator';
+    import {
+        Vue,
+        Component,
+        VModel,
+        Ref,
+        Watch,
+        Emit,
+    } from 'vue-property-decorator';
     import Vditor from 'vditor';
     import 'vditor/dist/index.css';
+    import CosService from '../../infrastructure/CosService';
 
     @Component
     export default class VEditorComponent extends Vue {
@@ -37,6 +45,10 @@
 
                 input: (value) => this.onValueChanged(value),
                 after: () => this.afterInit(),
+                upload: {
+                    handler: (files: File[]): string | null =>
+                        this.OnUploadHandler(files),
+                },
             });
         }
 
@@ -46,6 +58,24 @@
 
         private onValueChanged(value: string) {
             this.content = value;
+        }
+
+        async OnUploadHandler(files: File[]): null {
+            try {
+                const list = await this.Upload(files);
+                for (const url of list) {
+                    this.instance?.insertValue(`![${url}](${url})`);
+                }
+            } catch (e) {
+                this.instance?.tip(e);
+                return e;
+            }
+        }
+
+        async Upload(files: File[]): Promise<string[]> {
+            if (files.length <= 0) throw `请选择文件`;
+            const list = await CosService.multiUpload(files);
+            return list;
         }
     }
 </script>

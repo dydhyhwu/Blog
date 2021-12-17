@@ -67,6 +67,16 @@ namespace Blog.API.Controllers
         public TempCredentialOutput GetCredential()
         {
             return service.GenerateCredential();
-        } 
+        }
+
+        /// <summary>
+        /// 获取启用的存储桶基本配置信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public CosProviderConfigOutput GetConfig()
+        {
+            return service.GetEnableProviderConfig();
+        }
     }
 }
