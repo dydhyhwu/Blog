@@ -33,7 +33,10 @@ class CosService {
                         reject(err);
                         return;
                     }
-                    resolve([data.Location]);
+                    const name = data.Location.substring(
+                        data.Location.lastIndexOf('/') + 1
+                    );
+                    resolve([`http://1.15.82.132:9004/p/${name}`]);
                 }
             );
         });
