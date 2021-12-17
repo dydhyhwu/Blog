@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using YH.Arch.Domain;
 
 namespace Blog.Core.Domain
@@ -49,36 +51,57 @@ namespace Blog.Core.Domain
         {
             Enable = true;
         }
-    }
 
-    /// <summary>
-    /// 腾讯云STS授权用，指明权限
-    /// </summary>
-    public enum TencentStsAction : int
-    {
-        /// <summary>
-        /// 包含以下权限：
-        /// name/cos:PutObject
-        /// </summary>
-        [Description("简单上传")]
-        NormalUpload = 0,
-        
-        /// <summary>
-        /// 包含以下权限：
-        /// name/cos:PostObject
-        /// </summary>
-        [Description("表单、小程序上传")]
-        FormOrMiniUpload = 1,
-        
-        /// <summary>
-        /// 包含以下权限：
-        /// name/cos:InitiateMultipartUpload
-        /// name/cos:ListMultipartUploads
-        /// name/cos:ListParts
-        /// name/cos:UploadPart
-        /// name/cos:CompleteMultipartUpload
-        /// </summary>
-        [Description("分块上传")]
-        MultipartUpload = 2
+        public StsClientCredentialConfig GenerateConfig()
+        {
+            return new StsClientCredentialConfig()
+            {
+                SecretId = Account.SecretId,
+                SecretKey = Account.SecretKey,
+                DurationSeconds = Duration,
+                Bucket = $"{BucketName}-{Account.AppId}",
+                Region = Region,
+                AllowPrefixes = AllowPrefix.Split(','),
+                AllowActions = GetAllowActions(),
+            };
+        }
+
+        private string[] GetAllowActions()
+        {
+            var actions = new List<string>();
+            var types = AllowActions.Split(',').Select(Enum.Parse<TencentStsAction>);
+            foreach (var type in types)
+            {
+                actions.AddRange(GetActionsByType(type));
+            }
+
+            return actions.ToArray();
+        }
+
+        private IList<string> GetActionsByType(TencentStsAction type)
+        {
+            var result = new List<string>();
+            switch (type)
+            {
+                case TencentStsAction.NormalUpload:
+                    result.AddRange(new [] { "name/cos:PutObject" });
+                    break;
+                case TencentStsAction.FormOrMiniUpload:
+                    result.AddRange(new [] { "name/cos:PostObject" });
+                    break;
+                case TencentStsAction.MultipartUpload:
+                    result.AddRange(new[]
+                    {
+                        "name/cos:InitiateMultipartUpload",
+                        "name/cos:ListMultipartUploads",
+                        "name/cos:ListParts",
+                        "name/cos:UploadPart",
+                        "name/cos:CompleteMultipartUpload"
+                    });
+                    break;
+            }
+
+            return result;
+        }
     }
 }

@@ -57,5 +57,16 @@ namespace Blog.API.Controllers
         {
             service.SetEnable(id);
         }
+        
+
+        /// <summary>
+        /// 获取临时凭证
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public TempCredentialOutput GetCredential()
+        {
+            return service.GenerateCredential();
+        } 
     }
 }

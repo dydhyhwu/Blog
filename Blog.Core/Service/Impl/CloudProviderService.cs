@@ -6,6 +6,7 @@ using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
+using YH.Arch.Infrastructure.Exception;
 using YH.Arch.Infrastructure.Extension;
 using YH.Arch.Infrastructure.ORM;
 
@@ -16,12 +17,14 @@ namespace Blog.Core.Service.Impl
         private readonly Repository repository;
         private readonly Queries queries;
         private readonly IMapper mapper;
+        private readonly ICosService cosService;
 
-        public CloudProviderService(Repository repository, Queries queries, IMapper mapper)
+        public CloudProviderService(Repository repository, Queries queries, IMapper mapper, ICosService cosService)
         {
             this.repository = repository;
             this.queries = queries;
             this.mapper = mapper;
+            this.cosService = cosService;
         }
 
         public void Add(AddCloudProviderInput input)
@@ -95,6 +98,21 @@ namespace Blog.Core.Service.Impl
             var provider = repository.GetSingle(queries.GetCosProviderBy(id));
             provider.IsEnable();
             repository.Update(provider);
+        }
+
+        public TempCredentialOutput GenerateCredential()
+        {
+            var query = queries.GetEnableCosProvider();
+            if (!repository.Existed(query)) throw new BusinessException("未设置默认存储，请先设置默认存储！");
+            var provider = repository.GetSingle(query);
+            var config = provider.GenerateConfig();
+            var result = cosService.GetTempToken(config.AsDictionary());
+            return new TempCredentialOutput()
+            {
+                Token = result.Credentials.Token,
+                SecretId = result.Credentials.TmpSecretId,
+                SecretKey = result.Credentials.TmpSecretKey
+            };
         }
 
         private CosProvider GetProvider(Guid id)

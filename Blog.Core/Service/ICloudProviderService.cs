@@ -13,5 +13,6 @@ namespace Blog.Core.Service
         CloudProviderOutput Detail(Guid id);
         IList<CloudProviderListOutput> List();
         void SetEnable(Guid id);
+        TempCredentialOutput GenerateCredential();
     }
 }
