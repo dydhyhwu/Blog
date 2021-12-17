@@ -13,6 +13,7 @@ export interface CosProviderListItem {
     region: string;
     allowPrefix: string;
     allowActions: StsClientAction[];
+    enable: boolean;
 }
 
 export enum StsClientAction {

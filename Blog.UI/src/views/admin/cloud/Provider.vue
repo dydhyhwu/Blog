@@ -1,6 +1,13 @@
 <template>
     <div class="full-height">
-        <v-data-table :headers="headers" :items="items" hide-default-footer>
+        <v-data-table
+            :headers="headers"
+            :items="items"
+            hide-default-footer
+            disable-filtering
+            disable-pagination
+            disable-sort
+        >
             <template #top>
                 <v-row no-gutters align="center" class="mx-2">
                     <v-col>
@@ -13,8 +20,19 @@
                     <div></div>
                 </v-row>
             </template>
+            <template #item.enable="{ item }">
+                <v-icon :color="getStatusColor(item)">mdi-circle</v-icon>
+            </template>
             <template #item.options="{ item }">
                 <div>
+                    <v-btn
+                        color="primary"
+                        text
+                        depressed
+                        @click="setEnable(item)"
+                    >
+                        设为默认
+                    </v-btn>
                     <v-btn color="error" text depressed @click="remove(item)">
                         删除
                     </v-btn>
@@ -123,6 +141,10 @@
                 value: 'allowActions',
             },
             {
+                text: '状态',
+                value: 'enable',
+            },
+            {
                 text: '操作',
                 value: 'options',
             },
@@ -202,6 +224,18 @@
         @OnFinishedSuccess('删除成功')
         async remove(item: CosProviderListItem): Promise<void> {
             await this.repository.CosProvider.Remove(item.id);
+            this.getProviderList();
+        }
+
+        getStatusColor(item: CosProviderListItem): string {
+            return item.enable ? 'success' : 'error';
+        }
+
+        @OnFinishedSuccess('设置成功')
+        @Confirm('只会存在一个启用状态，是否设置为默认存储？')
+        @WithLoading('')
+        async setEnable(item: CosProviderListItem): Promise<void> {
+            await this.repository.CosProvider.SetEnable(item.id);
             this.getProviderList();
         }
     }

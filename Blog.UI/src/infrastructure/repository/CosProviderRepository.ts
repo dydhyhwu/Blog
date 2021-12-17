@@ -16,4 +16,8 @@ export default class CosProviderRepository {
         };
         return AxiosHttp.Instance.post('/CloudProvider/Delete', data);
     }
+
+    async SetEnable(id: string): Promise<void> {
+        return AxiosHttp.Instance.post(`/CloudProvider/Enable?id=${id}`, {});
+    }
 }
