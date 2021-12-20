@@ -46,8 +46,10 @@
                 input: (value) => this.onValueChanged(value),
                 after: () => this.afterInit(),
                 upload: {
-                    handler: (files: File[]): string | null =>
-                        this.OnUploadHandler(files),
+                    handler: (files: File[]): string | null => {
+                        this.OnUploadHandler(files);
+                        return null;
+                    },
                 },
             });
         }
@@ -60,22 +62,19 @@
             this.content = value;
         }
 
-        async OnUploadHandler(files: File[]): null {
+        async OnUploadHandler(files: File[]): Promise<null> {
             try {
-                const list = await this.Upload(files);
-                for (const url of list) {
-                    this.instance?.insertValue(`![${url}](${url})`);
-                }
+                const url = await this.Upload(files[0]);
+                this.instance?.insertValue(`![${files[0].name}](${url})`);
             } catch (e) {
                 this.instance?.tip(e);
                 return e;
             }
         }
 
-        async Upload(files: File[]): Promise<string[]> {
-            if (files.length <= 0) throw `请选择文件`;
-            const list = await CosService.multiUpload(files);
-            return list;
+        async Upload(file: File): Promise<string> {
+            const url = await CosService.upload(file);
+            return url;
         }
     }
 </script>

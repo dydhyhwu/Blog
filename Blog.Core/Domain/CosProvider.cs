@@ -42,6 +42,16 @@ namespace Blog.Core.Domain
         /// </summary>
         public bool Enable { get; set; } = false;
 
+        /// <summary>
+        /// 上传的前缀
+        /// </summary>
+        public string UploadPrefix { get; set; }
+
+        /// <summary>
+        /// 访问的域名
+        /// </summary>
+        public string Host { get; set; }
+
         public virtual void IsDisable()
         {
             Enable = false;

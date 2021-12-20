@@ -37,7 +37,9 @@ namespace Blog.Core.Service.Impl
                 BucketName = input.Name,
                 Duration = input.Duration,
                 AllowPrefix = input.AllowPrefix,
-                AllowActions = string.Join(",", input.AllowActions)
+                AllowActions = string.Join(",", input.AllowActions),
+                UploadPrefix = input.UploadPrefix,
+                Host = input.Host,
             };
             
             repository.Add(provider);
@@ -59,6 +61,8 @@ namespace Blog.Core.Service.Impl
             provider.Duration = input.Duration;
             provider.AllowPrefix = input.AllowPrefix;
             provider.AllowActions = string.Join(",", input.AllowActions);
+            provider.UploadPrefix = input.UploadPrefix;
+            provider.Host = input.Host;
             repository.Update(provider);
         }
 
@@ -75,7 +79,9 @@ namespace Blog.Core.Service.Impl
                 Duration = provider.Duration,
                 AllowPrefix = provider.AllowPrefix,
                 AllowActions = actions.ToList(),
-                Enable = provider.Enable
+                Enable = provider.Enable,
+                UploadPrefix = provider.UploadPrefix,
+                Host = provider.Host
             };
         }
 
@@ -109,8 +115,6 @@ namespace Blog.Core.Service.Impl
             var result = cosService.GetTempToken(config.AsDictionary());
             return new TempCredentialOutput()
             {
-                Bucket = config.Bucket,
-                Region = config.Region,
                 Token = result.Credentials.Token,
                 SecretId = result.Credentials.TmpSecretId,
                 SecretKey = result.Credentials.TmpSecretKey,
@@ -129,6 +133,8 @@ namespace Blog.Core.Service.Impl
             {
                 Bucket = config.Bucket,
                 Region = config.Region,
+                UploadPrefix = provider.UploadPrefix,
+                Host = provider.Host
             };
         }
 

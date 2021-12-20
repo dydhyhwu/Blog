@@ -1,4 +1,8 @@
-import { AddCosProvider, CosProviderListItem } from '../../models/Cloud';
+import {
+    AddCosProvider,
+    CosProviderDetail,
+    CosProviderListItem,
+} from '../../models/Cloud';
 import AxiosHttp from '../http';
 import { Credential } from '../../domain/Credential';
 import { BucketConfig } from '../../domain/BucketConfig';
@@ -29,5 +33,16 @@ export default class CosProviderRepository {
 
     async GetConfig(): Promise<BucketConfig> {
         return AxiosHttp.Instance.get('/CloudProvider/GetConfig');
+    }
+
+    async Detail(id: string): Promise<CosProviderDetail> {
+        const param = {
+            id: id,
+        };
+        return AxiosHttp.Instance.get('/CloudProvider/Detail', param);
+    }
+
+    async Edit(item: CosProviderDetail): Promise<void> {
+        return AxiosHttp.Instance.post('/CloudProvider/Edit', item);
     }
 }

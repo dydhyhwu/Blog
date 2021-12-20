@@ -4,7 +4,6 @@ import { BucketConfig } from '../domain/BucketConfig';
 import dayjs from 'dayjs';
 
 class CosService {
-    private config: BucketConfig = { bucket: '', region: '' };
     private instance: COS = new COS({
         getAuthorization: async (options, callback) => {
             const data = await new CosProviderRepository().GetCredential();
@@ -18,18 +17,20 @@ class CosService {
             });
         },
     });
-    async multiUpload(files: File[]): Promise<string[]> {
-        this.config = await new CosProviderRepository().GetConfig();
-        const file = files[0];
-        const file_name = `${dayjs().format('YYYY-MM-DD-HH-mm-ss')}-${
-            file.name
-        }`;
-        return new Promise<string[]>((resolve, reject) => {
+    async upload(file: File): Promise<string> {
+        const {
+            bucket,
+            region,
+            uploadPrefix,
+            host,
+        } = await new CosProviderRepository().GetConfig();
+        const file_key = this.generateFileKey(uploadPrefix, file.name);
+        return new Promise<string>((resolve, reject) => {
             this.instance.putObject(
                 {
-                    Bucket: this.config.bucket,
-                    Region: this.config.region,
-                    Key: `images/${file_name}`,
+                    Bucket: bucket,
+                    Region: region,
+                    Key: file_key,
                     Body: file,
                 },
                 (err, data) => {
@@ -40,10 +41,23 @@ class CosService {
                     const name = data.Location.substring(
                         data.Location.lastIndexOf('/') + 1
                     );
-                    resolve([`http://1.15.82.132:9004/p/${name}`]);
+                    const url = this.generateUrl(name, host);
+                    resolve(url);
                 }
             );
         });
+    }
+
+    private generateFileKey(prefix: string, name: string): string {
+        const datetime = dayjs().format('YYYY-MM-DD-HH-mm-ss');
+        const file_name = `${datetime}-${name}`;
+        const split_char = prefix.endsWith('/') ? '' : '/';
+        return `${prefix}${split_char}${file_name}`;
+    }
+
+    private generateUrl(name: string, host: string): string {
+        const split_chat = host.endsWith('/') ? '' : '/';
+        return `${host}${split_chat}${name}`;
     }
 }
 

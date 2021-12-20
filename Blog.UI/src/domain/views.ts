@@ -10,3 +10,4 @@ export const EditArticle = 'EditArticle';
 export const CategoryManage = 'CategoryManage';
 export const CloudAccountManage = 'CloudAccountManage';
 export const CloudProviderManage = 'CloudProviderManage';
+export const CloudProviderEdit = 'CloudProviderEdit';

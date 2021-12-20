@@ -35,3 +35,15 @@ export interface AddCosProvider {
     allowPrefix: string;
     allowActions: StsClientAction[];
 }
+
+export class CosProviderDetail {
+    id: string;
+    accountId: string;
+    region: string;
+    bucketName: string;
+    duration: number;
+    allowPrefix: string;
+    allowActions: StsClientAction[];
+    uploadPrefix: string;
+    host: string;
+}

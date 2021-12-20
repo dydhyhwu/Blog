@@ -45,6 +45,7 @@
                     >
                         设为默认
                     </v-btn>
+                    <v-btn text depressed @click="toEdit(item)">编辑</v-btn>
                     <v-btn color="error" text depressed @click="remove(item)">
                         删除
                     </v-btn>
@@ -117,22 +118,27 @@
 <script lang="ts">
     import { Component, Inject } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
-    import { CloudProviderManage } from '@/domain/views';
-    import BasePage from '@/infrastructure/basePage';
-    import { Repository } from '../../../domain/providers';
-    import { Repositories } from '../../../infrastructure/repository';
+    import {
+        CloudProviderEdit,
+        CloudProviderManage,
+    } from '../../../../domain/views';
+    import BasePage from '../../../../infrastructure/basePage';
+    import { Navigator, Repository } from '../../../../domain/providers';
+    import { Repositories } from '../../../../infrastructure/repository';
     import {
         AddCosProvider,
         CloudAccount,
         CosProviderListItem,
         StsClientAction,
-    } from '../../../models/Cloud';
+    } from '../../../../models/Cloud';
     import { Confirm, OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
+    import { Navigation } from '../../../../infrastructure/navigator';
 
     @RouteName(CloudProviderManage)
     @Component
     export default class CloudProviderManagePage extends BasePage {
         @Inject(Repository) repository: Repositories;
+        @Inject(Navigator) navigator: Navigation;
 
         headers = [
             { text: 'ID', value: 'id' },
@@ -267,6 +273,12 @@
                 }
             }
             return result;
+        }
+
+        toEdit(item: CosProviderListItem): void {
+            this.navigator.redirect(CloudProviderEdit, {
+                id: item.id,
+            });
         }
     }
 </script>

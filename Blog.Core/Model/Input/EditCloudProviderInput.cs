@@ -13,5 +13,7 @@ namespace Blog.Core.Model.Input
         public int Duration { get; set; }
         public string AllowPrefix { get; set; }
         public IList<TencentStsAction> AllowActions { get; set; }
+        public string UploadPrefix { get; set; }
+        public string Host { get; set; }
     }
 }

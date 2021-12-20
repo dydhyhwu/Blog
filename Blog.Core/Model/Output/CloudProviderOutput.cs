@@ -14,5 +14,7 @@ namespace Blog.Core.Model.Output
         public string AllowPrefix { get; set; }
         public IList<TencentStsAction> AllowActions { get; set; }
         public bool Enable { get; set; }
+        public string UploadPrefix { get; set; }
+        public string Host { get; set; }
     }
 }
