@@ -32,7 +32,10 @@ namespace Blog.API
         {
 
             services.AddControllers()
-                .AddMvcOptions(options => options.Filters.Add<ApiResponseFilter>())
+                .AddMvcOptions(options =>
+                {
+                    options.Filters.Add<ApiResponseFilter>();
+                })
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = Settings.JsonSerializer.ContractResolver;
