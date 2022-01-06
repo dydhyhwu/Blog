@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using ZeroSum.Attributes;
 
 namespace Blog.Core.Domain
 {
+    [Entity]
     [Table(nameof(Article))]
     [Description("博客文章")]
     public class Article : Content

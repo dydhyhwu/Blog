@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Tencent.QCloud.Cos.Sts.Sdk" Version="3.0.4" />
-    <PackageReference Include="ZeroSum" Version="1.1.0" />
+    <PackageReference Include="ZeroSum" Version="1.2.0" />
   </ItemGroup>
 
 </Project>

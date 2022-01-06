@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using YH.Arch.Domain;
+using ZeroSum.Attributes;
 
 namespace Blog.Core.Domain
 {
+    [Entity]
     [Table(nameof(CosProvider))]
     [Description("腾讯云对象存储设置")]
     public class CosProvider : BaseEntity
