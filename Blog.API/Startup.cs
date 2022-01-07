@@ -70,7 +70,7 @@ namespace Blog.API
                     ServerVersion.AutoDetect(Configuration["Db"]), 
                     mysqlOptions =>
                     {
-                        mysqlOptions.CharSet(CharSet.Utf8Mb4);
+                        // mysqlOptions.CharSet(CharSet.Utf8Mb4);
                     });
             });
 
