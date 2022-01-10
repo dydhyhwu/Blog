@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace YH.Arch.Infrastructure
+namespace Blog.Core.Infrastructure
 {
     public static class Settings
     {
