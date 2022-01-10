@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Blog.Core.Infrastructure.Orm;
+using Blog.Core.Service;
+using Blog.Core.Service.Impl;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ZeroSum.App.Extensions;
@@ -22,13 +25,13 @@ public class Startup : IAppStartup
         services.AddCors();
         services.AddEFCore(configuration);
         services.AddSwaggerDoc(configuration);
-        // services.AddScoped<FavoriteLinkService, FavoriteLinkServiceImpl>();
-        // services.AddScoped<Queries, QueriesImpl>();
-        // services.AddScoped<ArticleService, ArticleServiceImpl>();
-        // services.AddScoped<ICategoryService, CategoryService>();
-        // services.AddScoped<ICosService, CosService>();
-        // services.AddScoped<ICloudProviderService, CloudProviderService>();
-        // services.AddScoped<ICloudAccountService, CloudAccountService>();
+        services.AddScoped<FavoriteLinkService, FavoriteLinkServiceImpl>();
+        services.AddScoped<Queries, QueriesImpl>();
+        services.AddScoped<ArticleService, ArticleServiceImpl>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<ICosService, CosService>();
+        services.AddScoped<ICloudProviderService, CloudProviderService>();
+        services.AddScoped<ICloudAccountService, CloudAccountService>();
     }
 
     public void Configuration(IApplicationBuilder app)

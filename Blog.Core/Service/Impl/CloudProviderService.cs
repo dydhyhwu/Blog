@@ -8,18 +8,18 @@ using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using YH.Arch.Infrastructure.Exception;
 using YH.Arch.Infrastructure.Extension;
-using YH.Arch.Infrastructure.ORM;
+using ZeroSum.Domain.Repositories;
 
 namespace Blog.Core.Service.Impl
 {
     public class CloudProviderService : ICloudProviderService
     {
-        private readonly Repository repository;
+        private readonly IRepository repository;
         private readonly Queries queries;
         private readonly IMapper mapper;
         private readonly ICosService cosService;
 
-        public CloudProviderService(Repository repository, Queries queries, IMapper mapper, ICosService cosService)
+        public CloudProviderService(IRepository repository, Queries queries, IMapper mapper, ICosService cosService)
         {
             this.repository = repository;
             this.queries = queries;
@@ -87,7 +87,7 @@ namespace Blog.Core.Service.Impl
 
         public IList<CloudProviderListOutput> List()
         {
-            var list = repository.GetMulti(queries.GetCosProvider()).ToList();
+            var list = repository.GetList(queries.GetCosProvider());
             return mapper.MapList<CosProvider, CloudProviderListOutput>(list);
         }
 
@@ -96,12 +96,12 @@ namespace Blog.Core.Service.Impl
             var query = queries.GetEnableCosProvider();
             if (repository.Existed(query))
             {
-                var enableProvider = repository.GetSingle(query);
+                var enableProvider = repository.Get(query);
                 enableProvider.IsDisable();
                 repository.Update(enableProvider);
             }
 
-            var provider = repository.GetSingle(queries.GetCosProviderBy(id));
+            var provider = repository.Get(queries.GetCosProviderBy(id));
             provider.IsEnable();
             repository.Update(provider);
         }
@@ -110,7 +110,7 @@ namespace Blog.Core.Service.Impl
         {
             var query = queries.GetEnableCosProvider();
             if (!repository.Existed(query)) throw new BusinessException("未设置默认存储，请先设置默认存储！");
-            var provider = repository.GetSingle(query);
+            var provider = repository.Get(query);
             var config = provider.GenerateConfig();
             var result = cosService.GetTempToken(config.AsDictionary());
             return new TempCredentialOutput()
@@ -127,7 +127,7 @@ namespace Blog.Core.Service.Impl
         {
             var query = queries.GetEnableCosProvider();
             if (!repository.Existed(query)) throw new BusinessException("未设置默认存储，请先设置默认存储！");
-            var provider = repository.GetSingle(query);
+            var provider = repository.Get(query);
             var config = provider.GenerateConfig();
             return new CosProviderConfigOutput()
             {
@@ -140,12 +140,12 @@ namespace Blog.Core.Service.Impl
 
         private CosProvider GetProvider(Guid id)
         {
-            return repository.GetSingle(queries.GetCosProviderBy(id));
+            return repository.Get(queries.GetCosProviderBy(id));
         }
 
         private TencentCloudAccount GetAccount(Guid id)
         {
-            return repository.GetSingle(queries.GetCloudAccountBy(id));
+            return repository.Get(queries.GetCloudAccountBy(id));
         }
     }
 }

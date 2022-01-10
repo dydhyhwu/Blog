@@ -1,6 +1,4 @@
-﻿using YH.Arch.Domain;
-
-namespace Blog.Core.Domain
+﻿namespace Blog.Core.Domain
 {
     public class Content : BaseEntity, INeedAuthorize
     {

@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using YH.Arch.Infrastructure.Extension;
-using YH.Arch.Infrastructure.ORM;
+using ZeroSum.Domain.Repositories;
 
 namespace Blog.Core.Service.Impl
 {
     public class CloudAccountService : ICloudAccountService
     {
-        private readonly Repository repository;
+        private readonly IRepository repository;
         private readonly Queries queries;
         private readonly IMapper mapper;
 
-        public CloudAccountService(Repository repository, Queries queries, IMapper mapper)
+        public CloudAccountService(IRepository repository, Queries queries, IMapper mapper)
         {
             this.repository = repository;
             this.queries = queries;
@@ -67,13 +66,13 @@ namespace Blog.Core.Service.Impl
 
         public IList<CloudAccountListOutput> List()
         {
-            var list = repository.GetMulti(queries.GetCLoudAccount()).ToList();
+            var list = repository.GetList(queries.GetCLoudAccount());
             return mapper.MapList<TencentCloudAccount, CloudAccountListOutput>(list);
         }
 
         private TencentCloudAccount GetAccount(Guid id)
         {
-            return repository.GetSingle(queries.GetCloudAccountBy(id));
+            return repository.Get(queries.GetCloudAccountBy(id));
         }
     }
 }

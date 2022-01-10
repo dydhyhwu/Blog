@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Blog.Core.Domain;
-using YH.Arch.Infrastructure.ORM;
+using ZeroSum.Domain.Repositories;
 
 namespace Blog.Core.Infrastructure.Orm
 {
     public class QueriesImpl : Queries
     {
-        public Query<FavoriteLink> GetFavoriteLink(Guid id)
+        public IQuery<FavoriteLink> GetFavoriteLink(Guid id)
         {
             return QueryByEntity<FavoriteLink>.Of(query =>
             {
@@ -15,7 +15,7 @@ namespace Blog.Core.Infrastructure.Orm
             });
         }
 
-        public Query<Article> GetArticle(Guid id)
+        public IQuery<Article> GetArticle(Guid id)
         {
             return QueryByEntity<Article>.Of(query =>
             {
@@ -36,7 +36,7 @@ namespace Blog.Core.Infrastructure.Orm
             return QueryByEntity<FavoriteLink>.Of(query => query);
         }
 
-        public Query<Category> GetCategoryBy(string name)
+        public IQuery<Category> GetCategoryBy(string name)
         {
             return QueryByEntity<Category>.Of(query =>
             {
@@ -49,7 +49,7 @@ namespace Blog.Core.Infrastructure.Orm
             return QueryByEntity<Category>.Of(query => query);
         }
 
-        public Query<Category> GetCategoryBy(Guid id)
+        public IQuery<Category> GetCategoryBy(Guid id)
         {
             return QueryByEntity<Category>.Of(query =>
             {
@@ -70,17 +70,17 @@ namespace Blog.Core.Infrastructure.Orm
             return QueryByEntity<TencentCloudAccount>.Of(query => query.OrderByDescending(x => x.CreateTime));
         }
 
-        public Query<CosProvider> GetCosProviderBy(Guid id)
+        public IQuery<CosProvider> GetCosProviderBy(Guid id)
         {
             return QueryByEntity<CosProvider>.Of(query => query.Where(x => x.Id == id));
         }
 
-        public Query<CosProvider> GetCosProvider()
+        public IQuery<CosProvider> GetCosProvider()
         {
             return QueryByEntity<CosProvider>.Of(query => query.OrderByDescending(x => x.CreateTime));
         }
 
-        public Query<CosProvider> GetEnableCosProvider()
+        public IQuery<CosProvider> GetEnableCosProvider()
         {
             return QueryByEntity<CosProvider>.Of(query => query.Where(x => x.Enable == true));
         }

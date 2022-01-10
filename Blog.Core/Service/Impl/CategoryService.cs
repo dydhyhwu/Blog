@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Exception;
@@ -8,17 +7,17 @@ using Blog.Core.Model;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using YH.Arch.Infrastructure.Extension;
-using YH.Arch.Infrastructure.ORM;
+using ZeroSum.Domain.Repositories;
 
 namespace Blog.Core.Service.Impl
 {
     public class CategoryService : ICategoryService
     {
-        private readonly Repository repository;
+        private readonly IRepository repository;
         private readonly Queries queries;
         private readonly IMapper mapper;
 
-        public CategoryService(Repository repository, Queries queries, IMapper mapper)
+        public CategoryService(IRepository repository, Queries queries, IMapper mapper)
         {
             this.repository = repository;
             this.queries = queries;
@@ -38,9 +37,8 @@ namespace Blog.Core.Service.Impl
         public PageList<CategoryListOutput> List(PageListInput input)
         {
             var query = queries.GetCategories();
-            var count = repository.GetCount(query);
-            query = query.PaginationBy(input.Index, input.Size);
-            var categories = repository.GetMulti(query).ToList();
+            var count = repository.Count(query);
+            var categories = repository.GetList(query.Paged(input.Index, input.Size));
             return new PageList<CategoryListOutput>()
             {
                 Index = input.Index,
@@ -52,13 +50,13 @@ namespace Blog.Core.Service.Impl
 
         public void Delete(Guid id)
         {
-            var category = repository.GetSingle(queries.GetCategoryBy(id));
+            var category = repository.Get(queries.GetCategoryBy(id));
             repository.Remove(category);
         }
 
         public void Edit(CategoryEditInput input)
         {
-            var category = repository.GetSingle(queries.GetCategoryBy(input.Id));
+            var category = repository.Get(queries.GetCategoryBy(input.Id));
             if (input.Name == category.Name) return;
             if (Existed(input.Name)) throw new AlreadyExistedException($"分类[${input.Name}]已存在");
             category.Name = input.Name;

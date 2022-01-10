@@ -2,8 +2,8 @@
 using System.Reflection;
 using AutoMapper;
 using Blog.Core.Infrastructure.Orm;
+using YH.Arch.Infrastructure;
 using YH.Arch.Infrastructure.Extension;
-using YH.Arch.Infrastructure.ORM;
 
 namespace Blog.Core.Infrastructure.Mapper
 {
@@ -12,8 +12,8 @@ namespace Blog.Core.Infrastructure.Mapper
         public AutoRegistryProfile()
         {
             var mappers = getMappers(
-                typeof(Repository).Assembly,
-                typeof(BlogRepository).Assembly);
+                typeof(Queries).Assembly,
+                typeof(BaseController).Assembly);
 
             foreach (var mapperElement in mappers)
             {

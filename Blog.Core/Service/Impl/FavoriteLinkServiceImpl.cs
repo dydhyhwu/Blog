@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
@@ -7,17 +6,17 @@ using Blog.Core.Model;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using YH.Arch.Infrastructure.Extension;
-using YH.Arch.Infrastructure.ORM;
+using ZeroSum.Domain.Repositories;
 
 namespace Blog.Core.Service.Impl
 {
     public class FavoriteLinkServiceImpl : FavoriteLinkService
     {
-        private readonly Repository repository;
+        private readonly IRepository repository;
         private readonly IMapper mapper;
         private readonly Queries queries;
 
-        public FavoriteLinkServiceImpl(Repository repository, IMapper mapper, Queries queries)
+        public FavoriteLinkServiceImpl(IRepository repository, IMapper mapper, Queries queries)
         {
             this.repository = repository;
             this.mapper = mapper;
@@ -26,7 +25,7 @@ namespace Blog.Core.Service.Impl
 
         public FavoriteLinkOutput Get(Guid id)
         {
-            var link = repository.GetSingle(queries.GetFavoriteLink(id));
+            var link = repository.Get(queries.GetFavoriteLink(id));
             return mapper.Map<FavoriteLinkOutput>(link);
         }
 
@@ -38,8 +37,8 @@ namespace Blog.Core.Service.Impl
 
         public PageList<FavoriteLinkOutput> List(PageListInput input)
         {
-            var count = repository.GetCount(queries.GetFavoriteLinks());
-            var list = repository.GetMulti(queries.GetFavoriteLinks().PaginationBy(input.Index, input.Size)).ToList();
+            var count = repository.Count(queries.GetFavoriteLinks());
+            var list = repository.GetList(queries.GetFavoriteLinks().Paged(input.Index, input.Size));
             return new PageList<FavoriteLinkOutput>()
             {
                 Count = count,
