@@ -6,9 +6,9 @@ using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
-using YH.Arch.Infrastructure.Exception;
 using YH.Arch.Infrastructure.Extension;
 using ZeroSum.Domain.Repositories;
+using ZeroSum.Exceptions;
 
 namespace Blog.Core.Service.Impl
 {
@@ -109,7 +109,7 @@ namespace Blog.Core.Service.Impl
         public TempCredentialOutput GenerateCredential()
         {
             var query = queries.GetEnableCosProvider();
-            if (!repository.Existed(query)) throw new BusinessException("未设置默认存储，请先设置默认存储！");
+            if (!repository.Existed(query)) throw SystemConfigurationError.Of("未设置默认存储，请先设置默认存储！");
             var provider = repository.Get(query);
             var config = provider.GenerateConfig();
             var result = cosService.GetTempToken(config.AsDictionary());
@@ -126,7 +126,7 @@ namespace Blog.Core.Service.Impl
         public CosProviderConfigOutput GetEnableProviderConfig()
         {
             var query = queries.GetEnableCosProvider();
-            if (!repository.Existed(query)) throw new BusinessException("未设置默认存储，请先设置默认存储！");
+            if (!repository.Existed(query)) throw SystemConfigurationError.Of("未设置默认存储，请先设置默认存储！");
             var provider = repository.Get(query);
             var config = provider.GenerateConfig();
             return new CosProviderConfigOutput()

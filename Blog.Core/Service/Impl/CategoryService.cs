@@ -1,13 +1,13 @@
 ﻿using System;
 using AutoMapper;
 using Blog.Core.Domain;
-using Blog.Core.Infrastructure.Exception;
 using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
 using YH.Arch.Infrastructure.Extension;
 using ZeroSum.Domain.Repositories;
+using ZeroSum.Exceptions;
 
 namespace Blog.Core.Service.Impl
 {
@@ -26,7 +26,7 @@ namespace Blog.Core.Service.Impl
 
         public void Add(AddCategoryInput input)
         {
-            if (Existed(input.Name)) throw new AlreadyExistedException($"分类[${input.Name}]已存在");
+            if (Existed(input.Name)) throw AlreadyExistedException.Of($"分类[${input.Name}]已存在")!;
             var category = new Category()
             {
                 Name = input.Name
@@ -58,7 +58,7 @@ namespace Blog.Core.Service.Impl
         {
             var category = repository.Get(queries.GetCategoryBy(input.Id));
             if (input.Name == category.Name) return;
-            if (Existed(input.Name)) throw new AlreadyExistedException($"分类[${input.Name}]已存在");
+            if (Existed(input.Name)) throw AlreadyExistedException.Of($"分类[${input.Name}]已存在")!;
             category.Name = input.Name;
             repository.Update(category);
         }
