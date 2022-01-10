@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using YH.Arch.Domain;
 using ZeroSum.Attributes;
 
 namespace Blog.Core.Domain
