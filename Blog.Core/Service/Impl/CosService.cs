@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using ZeroSum.DependencyInjection.Attributes;
 
 namespace Blog.Core.Service.Impl
 {
+    [Register]
     public class CosService : ICosService
     {
         public CosService()

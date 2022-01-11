@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
+using ZeroSum.DependencyInjection.Attributes;
 using ZeroSum.Domain.Repositories;
+using ZeroSum.Extend.Mapper.Extensions;
 
 namespace Blog.Core.Service.Impl
 {
+    [Register]
     public class CloudAccountService : ICloudAccountService
     {
         private readonly IRepository repository;
         private readonly Queries queries;
-        private readonly IMapper mapper;
 
-        public CloudAccountService(IRepository repository, Queries queries, IMapper mapper)
+        public CloudAccountService(IRepository repository, Queries queries)
         {
             this.repository = repository;
             this.queries = queries;
-            this.mapper = mapper;
         }
 
         public void Add(AddCloudAccountInput input)
@@ -66,7 +66,7 @@ namespace Blog.Core.Service.Impl
         public IList<CloudAccountListOutput> List()
         {
             var list = repository.GetList(queries.GetCLoudAccount());
-            return mapper.MapList<TencentCloudAccount, CloudAccountListOutput>(list);
+            return list.MapList<TencentCloudAccount, CloudAccountListOutput>();
         }
 
         private TencentCloudAccount GetAccount(Guid id)

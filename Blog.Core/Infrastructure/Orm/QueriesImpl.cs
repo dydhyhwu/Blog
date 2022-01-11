@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Blog.Core.Domain;
+using ZeroSum.DependencyInjection.Attributes;
 using ZeroSum.Domain.Repositories;
 
 namespace Blog.Core.Infrastructure.Orm
 {
+    [Register]
     public class QueriesImpl : Queries
     {
         public IQuery<FavoriteLink> GetFavoriteLink(Guid id)

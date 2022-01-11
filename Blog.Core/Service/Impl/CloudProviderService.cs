@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
+using ZeroSum.DependencyInjection.Attributes;
 using ZeroSum.Domain.Repositories;
 using ZeroSum.Exceptions;
+using ZeroSum.Extend.Mapper.Extensions;
 
 namespace Blog.Core.Service.Impl
 {
+    [Register]
     public class CloudProviderService : ICloudProviderService
     {
         private readonly IRepository repository;
         private readonly Queries queries;
-        private readonly IMapper mapper;
         private readonly ICosService cosService;
 
-        public CloudProviderService(IRepository repository, Queries queries, IMapper mapper, ICosService cosService)
+        public CloudProviderService(IRepository repository, Queries queries, ICosService cosService)
         {
             this.repository = repository;
             this.queries = queries;
-            this.mapper = mapper;
             this.cosService = cosService;
         }
 
@@ -87,7 +87,7 @@ namespace Blog.Core.Service.Impl
         public IList<CloudProviderListOutput> List()
         {
             var list = repository.GetList(queries.GetCosProvider());
-            return mapper.MapList<CosProvider, CloudProviderListOutput>(list);
+            return list.MapList<CosProvider, CloudProviderListOutput>();
         }
 
         public void SetEnable(Guid id)

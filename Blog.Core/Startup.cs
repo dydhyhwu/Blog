@@ -1,14 +1,13 @@
-﻿using Blog.Core.Infrastructure.Orm;
-using Blog.Core.Service;
-using Blog.Core.Service.Impl;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ZeroSum.App.Extensions;
 using ZeroSum.App.Middlewares;
 using ZeroSum.DependencyInjection.Attributes;
+using ZeroSum.DependencyInjection.Extensions;
 using ZeroSum.DependencyInjection.Interfaces;
 using ZeroSum.Extend.EFCore.MySql;
+using ZeroSum.Extend.Mapper;
 using ZeroSum.Extend.Swagger;
 
 namespace Blog.Core;
@@ -25,13 +24,8 @@ public class Startup : IAppStartup
         services.AddCors();
         services.AddEFCore(configuration);
         services.AddSwaggerDoc(configuration);
-        services.AddScoped<FavoriteLinkService, FavoriteLinkServiceImpl>();
-        services.AddScoped<Queries, QueriesImpl>();
-        services.AddScoped<ArticleService, ArticleServiceImpl>();
-        services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<ICosService, CosService>();
-        services.AddScoped<ICloudProviderService, CloudProviderService>();
-        services.AddScoped<ICloudAccountService, CloudAccountService>();
+        services.AddAutoMapper();
+        services.AddDependencyInjection(ServiceLifetime.Scoped);
     }
 
     public void Configuration(IApplicationBuilder app)
@@ -40,7 +34,10 @@ public class Startup : IAppStartup
         app.EnableExceptionHandler();
 
         // 自动提交数据库改动
-        // app.EnableAutoSave();
+        app.EnableAutoSave();
+
+        // 自动映射
+        app.UseAutoMapper();
 
         app.UseCors();
         app.UseSwaggerDoc();

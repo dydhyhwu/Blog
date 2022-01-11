@@ -5,11 +5,14 @@ using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
+using ZeroSum.DependencyInjection.Attributes;
 using ZeroSum.Domain.Repositories;
 using ZeroSum.Exceptions;
+using ZeroSum.Extend.Mapper.Extensions;
 
 namespace Blog.Core.Service.Impl
 {
+    [Register]
     public class CategoryService : ICategoryService
     {
         private readonly IRepository repository;
@@ -43,7 +46,7 @@ namespace Blog.Core.Service.Impl
                 Index = input.Index,
                 Size = input.Size,
                 Count = count,
-                Data = mapper.MapList<Category, CategoryListOutput>(categories)
+                Data = categories.MapList<Category, CategoryListOutput>()
             };
         }
 
