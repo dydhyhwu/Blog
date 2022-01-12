@@ -11,7 +11,7 @@ namespace Blog.Core.Infrastructure.Mapper
             destination = new Article()
             {
                 Title = source.Title,
-                Format = source.Format,
+                Type = source.Type,
                 Value = source.Content,
                 Categories = string.Join(',', source.Categories)
             };

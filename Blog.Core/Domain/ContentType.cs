@@ -1,6 +1,6 @@
 ﻿namespace Blog.Core.Domain
 {
-    public enum ContentFormat
+    public enum ContentType
     {
         Markdown,
         Html,

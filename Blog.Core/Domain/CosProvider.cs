@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using ZeroSum.Attributes;
@@ -20,11 +21,13 @@ namespace Blog.Core.Domain
         /// <summary>
         /// cos桶所在地区
         /// </summary>
+        [MaxLength(32)]
         public string Region { get; set; }
         
         /// <summary>
         /// 桶名（不带appId的）
         /// </summary>
+        [MaxLength(128)]
         public string BucketName { get; set; }
         
         /// <summary>
@@ -35,11 +38,13 @@ namespace Blog.Core.Domain
         /// <summary>
         /// 临时授权凭证允许访问的前缀
         /// </summary>
+        [MaxLength(255)]
         public string AllowPrefix { get; set; }
         
         /// <summary>
         /// 临时授权凭证允许的操作
         /// </summary>
+        [MaxLength(255)]
         public string AllowActions { get; set; }
 
         /// <summary>
@@ -50,11 +55,13 @@ namespace Blog.Core.Domain
         /// <summary>
         /// 上传的前缀
         /// </summary>
+        [MaxLength(255)]
         public string UploadPrefix { get; set; }
 
         /// <summary>
         /// 访问的域名
         /// </summary>
+        [MaxLength(255)]
         public string Host { get; set; }
 
         public virtual void IsDisable()
