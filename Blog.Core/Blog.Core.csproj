@@ -11,12 +11,12 @@
 
   <ItemGroup>
     <PackageReference Include="Tencent.QCloud.Cos.Sts.Sdk" Version="3.0.4" />
-    <PackageReference Include="ZeroSum" Version="1.2.1" />
-    <PackageReference Include="ZeroSum.App" Version="1.2.1" />
-    <PackageReference Include="ZeroSum.Extend.Cors" Version="1.2.1" />
-    <PackageReference Include="ZeroSum.Extend.EFCore.MySql" Version="1.2.1" />
-    <PackageReference Include="ZeroSum.Extend.Mapper" Version="1.2.1" />
-    <PackageReference Include="ZeroSum.Extend.Swagger" Version="1.2.1" />
+    <PackageReference Include="ZeroSum" Version="1.2.3" />
+    <PackageReference Include="ZeroSum.App" Version="1.2.3" />
+    <PackageReference Include="ZeroSum.Extend.Cors" Version="1.2.3" />
+    <PackageReference Include="ZeroSum.Extend.EFCore.MySql" Version="1.2.3" />
+    <PackageReference Include="ZeroSum.Extend.Mapper" Version="1.2.3" />
+    <PackageReference Include="ZeroSum.Extend.Swagger" Version="1.2.3" />
   </ItemGroup>
 
 </Project>
