@@ -29,10 +29,7 @@ namespace Blog.Core.Service.Impl
         public void Add(AddCategoryInput input)
         {
             if (Existed(input.Name)) throw AlreadyExistedException.Of($"分类[${input.Name}]已存在")!;
-            var category = new Category()
-            {
-                Name = input.Name
-            };
+            var category = input.MapTo<Category>();
             repository.Add(category);
         }
 
