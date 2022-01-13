@@ -1,0 +1,23 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "Cors": {
+    "IPs": "*"
+  },
+  "ConnectionStrings": {
+    "Default": "Server=localhost;Port=3306; Database=DatabaseName;User ID=userId;Password=password;Charset=utf8mb4;"
+  },
+  "Swagger": {
+    "Title": "Blog API",
+    "Version": 1,
+    "Url": "/swagger/v1/swagger.json",
+    "MiniProfiler": false,
+    "Enabled": true
+  }
+}
