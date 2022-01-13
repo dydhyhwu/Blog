@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Blog.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 using ZeroSum.DependencyInjection.Attributes;
 using ZeroSum.Domain.Repositories;
 
@@ -79,7 +80,7 @@ namespace Blog.Core.Infrastructure.Orm
 
         public IQuery<CosProvider> GetCosProvider()
         {
-            return QueryByEntity<CosProvider>.Of(query => query.OrderByDescending(x => x.CreateTime));
+            return QueryByEntity<CosProvider>.Of(query => query.Include(x => x.Account).OrderByDescending(x => x.CreateTime));
         }
 
         public IQuery<CosProvider> GetEnableCosProvider()
