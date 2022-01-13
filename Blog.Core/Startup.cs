@@ -6,6 +6,7 @@ using ZeroSum.App.Middlewares;
 using ZeroSum.DependencyInjection.Attributes;
 using ZeroSum.DependencyInjection.Extensions;
 using ZeroSum.DependencyInjection.Interfaces;
+using ZeroSum.Extend.Cors;
 using ZeroSum.Extend.EFCore.MySql;
 using ZeroSum.Extend.Mapper;
 using ZeroSum.Extend.Swagger;
@@ -21,7 +22,7 @@ public class Startup : IAppStartup
         
         services.AddHttpContextAccessor();
         services.AddControllers().AddFriendlyResponse();
-        services.AddCors();
+        services.AddCorsSupported(configuration);
         services.AddEFCore(configuration);
         services.AddSwaggerDoc(configuration);
         services.AddAutoMapper();
@@ -39,7 +40,7 @@ public class Startup : IAppStartup
         // 自动映射
         app.UseAutoMapper();
 
-        app.UseCors();
+        app.UseCorsSupported();
         app.UseSwaggerDoc();
 
         app.UseRouting();
