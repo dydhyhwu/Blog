@@ -32,14 +32,15 @@
 <script lang="ts">
     import { Component, Inject, Prop } from 'vue-property-decorator';
     import { Context, EnableProp, RouteName } from 'ea-router';
-    import { EditArticle } from '@/domain/views';
+    import { ArticleManage, EditArticle } from '@/domain/views';
     import { ArticleEditModel } from '@/models/Article';
-    import { Repository } from '@/domain/providers';
+    import { Navigator, Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
     import MarkdownEditor from '@/components/editor';
     import BasePage from '@/infrastructure/basePage';
     import { Category } from '@/domains/Category';
-    import { WithLoading } from '@dydhyh/ui-tools';
+    import { OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
+    import { Navigation } from '../../../infrastructure/navigator';
 
     @RouteName(EditArticle)
     @Context('id')
@@ -51,6 +52,7 @@
     })
     export default class AddArticlePage extends BasePage {
         @Inject(Repository) repository: Repositories;
+        @Inject(Navigator) navigator: Navigation;
         @Prop() id;
 
         article: ArticleEditModel = {
@@ -83,9 +85,10 @@
             this.categories = data.data;
         }
 
+        @OnFinishedSuccess('保存成功')
         async save(): Promise<void> {
             await this.repository.Article.Edit(this.article);
-            this.message.success('保存成功');
+            this.navigator.redirect(ArticleManage);
         }
     }
 </script>
