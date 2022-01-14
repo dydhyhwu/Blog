@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Blog.Core.Model;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
@@ -11,5 +12,6 @@ namespace Blog.Core.Service
         PageList<CategoryListOutput> List(PageListInput input);
         void Delete(Guid id);
         void Edit(CategoryEditInput input);
+        IList<CategoryListOutput> All();
     }
 }

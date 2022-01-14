@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Blog.Core.Infrastructure;
 using Blog.Core.Model;
 using Blog.Core.Model.Input;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
@@ -60,6 +61,12 @@ namespace Blog.Core.Service.Impl
             if (Existed(input.Name)) throw AlreadyExistedException.Of($"分类[${input.Name}]已存在")!;
             category.Name = input.Name;
             repository.Update(category);
+        }
+
+        public IList<CategoryListOutput> All()
+        {
+            var categories = repository.GetList(queries.GetCategories());
+            return categories.MapTo<IList<CategoryListOutput>>();
         }
 
         private bool Existed(string name)

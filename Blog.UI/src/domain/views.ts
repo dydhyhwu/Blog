@@ -11,3 +11,6 @@ export const CategoryManage = 'CategoryManage';
 export const CloudAccountManage = 'CloudAccountManage';
 export const CloudProviderManage = 'CloudProviderManage';
 export const CloudProviderEdit = 'CloudProviderEdit';
+
+// 博客-分类展示页面
+export const Categories = 'Categories';

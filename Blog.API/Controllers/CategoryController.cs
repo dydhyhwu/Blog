@@ -1,4 +1,5 @@
-﻿using Blog.Core.Infrastructure;
+﻿using System.Collections.Generic;
+using Blog.Core.Infrastructure;
 using Blog.Core.Model;
 using Blog.Core.Model.Input;
 using Blog.Core.Model.Output;
@@ -38,6 +39,12 @@ namespace Blog.API.Controllers
         public void Edit(CategoryEditInput input)
         {
             service.Edit(input);
+        }
+
+        [HttpGet]
+        public IList<CategoryListOutput> All()
+        {
+            return service.All();
         }
     }
 }

@@ -21,4 +21,8 @@ export default class CategoryRepository {
         };
         return AxiosHttp.Instance.post('/Category/Delete', data);
     }
+
+    async All(): Promise<Category[]> {
+        return AxiosHttp.Instance.get('/Category/All');
+    }
 }
