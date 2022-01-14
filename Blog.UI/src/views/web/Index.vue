@@ -64,22 +64,6 @@
                             </v-list-item>
                         </v-list>
                     </v-card>
-
-                    <v-card class="mb-3" min-height="30vh">
-                        <v-card-subtitle>
-                            <v-icon>mdi-folder</v-icon>
-                            最新文章
-                        </v-card-subtitle>
-
-                        <v-list dense rounded>
-                            <v-list-item>
-                                <v-list-item-icon>
-                                    <v-icon>mdi-folder-outline</v-icon>
-                                </v-list-item-icon>
-                                <v-list-item-content>文章1</v-list-item-content>
-                            </v-list-item>
-                        </v-list>
-                    </v-card>
                 </v-col>
             </v-row>
         </v-container>
