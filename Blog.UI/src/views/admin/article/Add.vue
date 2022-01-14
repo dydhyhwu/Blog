@@ -33,13 +33,12 @@
     import { RouteName } from 'ea-router';
     import { AddArticle, ArticleManage } from '@/domain/views';
     import { Article, ContentFormat } from '@/models/Article';
-    import { Navigator, Repository } from '@/domain/providers';
+    import { Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
     import MarkdownEditor from '@/components/editor';
     import BasePage from '@/infrastructure/basePage';
     import { Category } from '@/domains/Category';
     import { OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
-    import { Navigation } from '../../../infrastructure/navigator';
 
     @RouteName(AddArticle)
     @Component({
@@ -49,7 +48,6 @@
     })
     export default class AddArticlePage extends BasePage {
         @Inject(Repository) repository: Repositories;
-        @Inject(Navigator) navigator: Navigation;
 
         article: Article = {
             categories: [],

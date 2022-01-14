@@ -77,7 +77,7 @@
     import { Context, EnableProp, RouteName } from 'ea-router';
     import { CloudProviderEdit, CloudProviderManage } from '@/domain/views';
     import BasePage from '@/infrastructure/basePage';
-    import { Navigator, Repository } from '@/domain/providers';
+    import { Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
     import {
         CloudAccount,
@@ -85,7 +85,6 @@
         StsClientAction,
     } from '@/models/Cloud';
     import { OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
-    import { Navigation } from '../../../../infrastructure/navigator';
 
     @RouteName(CloudProviderEdit)
     @Context('id')
@@ -93,7 +92,6 @@
     @Component
     export default class CloudProviderEditPage extends BasePage {
         @Inject(Repository) repository: Repositories;
-        @Inject(Navigator) navigator: Navigation;
 
         @Prop({ type: String, default: () => '' }) readonly id: string;
 

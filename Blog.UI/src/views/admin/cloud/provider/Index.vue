@@ -123,7 +123,7 @@
         CloudProviderManage,
     } from '../../../../domain/views';
     import BasePage from '../../../../infrastructure/basePage';
-    import { Navigator, Repository } from '../../../../domain/providers';
+    import { Repository } from '../../../../domain/providers';
     import { Repositories } from '../../../../infrastructure/repository';
     import {
         AddCosProvider,
@@ -132,13 +132,11 @@
         StsClientAction,
     } from '../../../../models/Cloud';
     import { Confirm, OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
-    import { Navigation } from '../../../../infrastructure/navigator';
 
     @RouteName(CloudProviderManage)
     @Component
     export default class CloudProviderManagePage extends BasePage {
         @Inject(Repository) repository: Repositories;
-        @Inject(Navigator) navigator: Navigation;
 
         headers = [
             { text: 'ID', value: 'id' },

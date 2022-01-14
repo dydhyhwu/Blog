@@ -7,6 +7,7 @@ import {
     SimpleLoadingOperator,
     SimpleMessageOperator,
 } from '@dydhyh/ui-tools';
+import SimpleNavigation, { Navigation } from './navigator';
 
 @Component
 export default class BasePage extends Vue {
@@ -14,4 +15,5 @@ export default class BasePage extends Vue {
     protected loader: LoadingOperator = SimpleLoadingOperator.Instance;
     protected confirm: ConfirmDialogOperator =
         SimpleConfirmDialogOperator.Instance;
+    protected navigator: Navigation = SimpleNavigation.Instance;
 }

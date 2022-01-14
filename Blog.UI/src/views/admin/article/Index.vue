@@ -38,9 +38,8 @@
     import { ArticleManage, AddArticle, EditArticle } from '@/domain/views';
     import { ArticleListItem } from '@/models/Article';
     import { Page } from '@/domain/page';
-    import { Repository, Navigator } from '@/domain/providers';
+    import { Repository } from '@/domain/providers';
     import { Repositories } from '@/infrastructure/repository';
-    import { Navigation } from '@/infrastructure/navigator';
     import BasePage from '@/infrastructure/basePage';
     import { Confirm, OnFinishedSuccess } from '@dydhyh/ui-tools';
 
@@ -48,7 +47,6 @@
     @Component
     export default class ArticleManagePage extends BasePage {
         @Inject(Repository) repository: Repositories;
-        @Inject(Navigator) navigator: Navigation;
 
         get AddArticleRoute() {
             return {
