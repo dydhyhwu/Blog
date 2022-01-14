@@ -35,5 +35,11 @@ namespace Blog.API.Controllers
         {
             return service.List(input);
         }
+
+        [HttpGet]
+        public IList<FavoriteLinkOutput> All()
+        {
+            return service.All();
+        }
     }
 }

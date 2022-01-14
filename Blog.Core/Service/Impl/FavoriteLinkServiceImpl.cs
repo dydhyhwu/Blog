@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Blog.Core.Domain;
 using Blog.Core.Infrastructure.Orm;
 using Blog.Core.Model;
@@ -45,6 +46,12 @@ namespace Blog.Core.Service.Impl
                 Index = input.Index,
                 Data = list.MapList<FavoriteLink, FavoriteLinkOutput>()
             };
+        }
+
+        public IList<FavoriteLinkOutput> All()
+        {
+            var links = repository.GetList(queries.GetFavoriteLinks());
+            return links.MapTo<IList<FavoriteLinkOutput>>();
         }
     }
 }

@@ -23,7 +23,7 @@
 
     @RouteName(Categories)
     @Component
-    export default class extends BasePage {
+    export default class CategoriesPage extends BasePage {
         list: Category[] = [];
 
         mounted(): void {

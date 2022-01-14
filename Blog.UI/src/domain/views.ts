@@ -14,3 +14,6 @@ export const CloudProviderEdit = 'CloudProviderEdit';
 
 // 博客-分类展示页面
 export const Categories = 'Categories';
+
+// 博客-导航展示页面
+export const Links = 'Links';

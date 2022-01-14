@@ -26,4 +26,8 @@ export class FavoriteLinkRepository {
             page
         );
     }
+
+    All() {
+        return AxiosHttp.Instance.get<FavoriteLink[]>('/FavoriteLink/All');
+    }
 }
