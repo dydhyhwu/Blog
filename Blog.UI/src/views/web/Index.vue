@@ -36,6 +36,10 @@
                             </v-btn>
                         </v-card-actions>
                     </v-card>
+                    <v-pagination
+                        v-model="page.index"
+                        :length="page.page"
+                    ></v-pagination>
                 </v-col>
                 <v-col cols="3">
                     <v-card class="mb-3" min-height="25vh">
@@ -86,7 +90,7 @@
 </template>
 
 <script lang="ts">
-    import { Component } from 'vue-property-decorator';
+    import { Component, Watch } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { ArticleDetail, Home } from '@/domain/views';
     import { Page } from '@/domain/page';
@@ -107,13 +111,20 @@
             this.init();
         }
 
-        async init(): Promise<void> {
+        init(): void {
+            this.loadCategories();
+        }
+
+        @Watch('page.index', { immediate: true, deep: true })
+        async onPageChanged(): Promise<void> {
+            await this.loadArticles();
+        }
+
+        private async loadArticles() {
             let response = await this.repository.Article.List(this.page);
             this.page.count = response.count;
             this.page.page = response.page;
             this.articles = response.data;
-
-            this.loadCategories();
         }
 
         detail(id: string): void {
