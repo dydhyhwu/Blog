@@ -92,7 +92,7 @@
     import { Page } from '@/domain/page';
     import { ArticleListItem } from '@/models/Article';
     import { Category } from '@/domains/Category';
-    import BasePage from '../../infrastructure/basePage';
+    import BasePage from '@/infrastructure/basePage';
 
     @RouteName(Home)
     @Component
