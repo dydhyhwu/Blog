@@ -11,11 +11,12 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Prop } from 'vue-property-decorator';
+    import { Component, Prop } from 'vue-property-decorator';
     import { Context, EnableProp, RouteName } from 'ea-router';
     import { ArticleDetail } from '@/domain/views';
     import { Article } from '@/models/Article';
     import ContentRender from '@/components/render';
+    import BasePage from '@/infrastructure/basePage';
 
     @RouteName(ArticleDetail)
     @Context('id')
@@ -25,7 +26,7 @@
             ContentRender,
         },
     })
-    export default class ArticleDetailPage extends Vue {
+    export default class ArticleDetailPage extends BasePage {
         @Prop() id: string;
 
         article: Article = null;

@@ -18,15 +18,16 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component } from 'vue-property-decorator';
+    import { Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { AddFavoriteLink, LinkManage } from '@/domain/views';
     import { FavoriteLink } from '@/models/FavoriteLink';
     import { Page } from '@/domain/page';
+    import BasePage from '@/infrastructure/basePage';
 
     @RouteName(LinkManage)
     @Component
-    export default class extends Vue {
+    export default class extends BasePage {
         headers = [
             {
                 text: '标题',
