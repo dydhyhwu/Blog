@@ -18,10 +18,7 @@
                         </v-card-subtitle>
                         <v-divider class="mx-auto" inset></v-divider>
                         <v-card-actions class="mx-4">
-                            <v-avatar color="primary" size="25">
-                                <span class="white--text">y</span>
-                            </v-avatar>
-                            <span class="caption mx-1">wjy</span>
+                            <v-icon small>mdi-calendar-range</v-icon>
                             <span class="caption mx-1">
                                 {{ article.createTime }}
                             </span>
