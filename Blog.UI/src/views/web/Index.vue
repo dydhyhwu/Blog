@@ -86,11 +86,9 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject } from 'vue-property-decorator';
+    import { Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { ArticleDetail, Home } from '@/domain/views';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
     import { Page } from '@/domain/page';
     import { ArticleListItem } from '@/models/Article';
     import { Category } from '@/domains/Category';
@@ -99,8 +97,6 @@
     @RouteName(Home)
     @Component
     export default class HomePage extends BasePage {
-        @Inject(Repository) repository: Repositories;
-
         rightImg = require('@/assets/images/right.jpg');
 
         page: Page = new Page();

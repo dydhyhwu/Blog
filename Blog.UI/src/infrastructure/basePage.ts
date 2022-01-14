@@ -8,6 +8,7 @@ import {
     SimpleMessageOperator,
 } from '@dydhyh/ui-tools';
 import SimpleNavigation, { Navigation } from './navigator';
+import RepositoryImpl, { Repositories } from './repository';
 
 @Component
 export default class BasePage extends Vue {
@@ -16,4 +17,5 @@ export default class BasePage extends Vue {
     protected confirm: ConfirmDialogOperator =
         SimpleConfirmDialogOperator.Instance;
     protected navigator: Navigation = SimpleNavigation.Instance;
+    protected repository: Repositories = new RepositoryImpl();
 }

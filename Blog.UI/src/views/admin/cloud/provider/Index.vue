@@ -116,15 +116,13 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject } from 'vue-property-decorator';
+    import { Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import {
         CloudProviderEdit,
         CloudProviderManage,
     } from '../../../../domain/views';
     import BasePage from '../../../../infrastructure/basePage';
-    import { Repository } from '../../../../domain/providers';
-    import { Repositories } from '../../../../infrastructure/repository';
     import {
         AddCosProvider,
         CloudAccount,
@@ -136,8 +134,6 @@
     @RouteName(CloudProviderManage)
     @Component
     export default class CloudProviderManagePage extends BasePage {
-        @Inject(Repository) repository: Repositories;
-
         headers = [
             { text: 'ID', value: 'id' },
             {

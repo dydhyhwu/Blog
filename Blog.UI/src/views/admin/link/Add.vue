@@ -28,19 +28,15 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject } from 'vue-property-decorator';
+    import { Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { AddFavoriteLink } from '@/domain/views';
     import { FavoriteLink } from '@/models/FavoriteLink';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
     import BasePage from '@/infrastructure/basePage';
 
     @RouteName(AddFavoriteLink)
     @Component
     export default class AddFavoriteLinkPage extends BasePage {
-        @Inject(Repository) repository: Repositories;
-
         link: FavoriteLink = new FavoriteLink();
 
         async save() {

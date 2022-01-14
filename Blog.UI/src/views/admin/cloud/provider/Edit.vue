@@ -73,12 +73,10 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject, Prop } from 'vue-property-decorator';
+    import { Component, Prop } from 'vue-property-decorator';
     import { Context, EnableProp, RouteName } from 'ea-router';
     import { CloudProviderEdit, CloudProviderManage } from '@/domain/views';
     import BasePage from '@/infrastructure/basePage';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
     import {
         CloudAccount,
         CosProviderDetail,
@@ -91,8 +89,6 @@
     @EnableProp()
     @Component
     export default class CloudProviderEditPage extends BasePage {
-        @Inject(Repository) repository: Repositories;
-
         @Prop({ type: String, default: () => '' }) readonly id: string;
 
         provider: CosProviderDetail = {

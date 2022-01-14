@@ -33,21 +33,17 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject } from 'vue-property-decorator';
+    import { Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { ArticleManage, AddArticle, EditArticle } from '@/domain/views';
     import { ArticleListItem } from '@/models/Article';
     import { Page } from '@/domain/page';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
     import BasePage from '@/infrastructure/basePage';
     import { Confirm, OnFinishedSuccess } from '@dydhyh/ui-tools';
 
     @RouteName(ArticleManage)
     @Component
     export default class ArticleManagePage extends BasePage {
-        @Inject(Repository) repository: Repositories;
-
         get AddArticleRoute() {
             return {
                 name: AddArticle,

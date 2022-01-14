@@ -74,20 +74,16 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject } from 'vue-property-decorator';
+    import { Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { CloudAccountManage } from '@/domain/views';
     import { CloudAccount } from '@/models/Cloud';
     import BasePage from '@/infrastructure/basePage';
-    import { Repository } from '../../../domain/providers';
-    import { Repositories } from '../../../infrastructure/repository';
     import { Confirm, OnFinishedSuccess } from '@dydhyh/ui-tools';
 
     @RouteName(CloudAccountManage)
     @Component
     export default class CloudAccountManagePage extends BasePage {
-        @Inject(Repository) repository: Repositories;
-
         loading = false;
 
         addDialog = false;

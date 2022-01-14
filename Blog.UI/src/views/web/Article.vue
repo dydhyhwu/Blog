@@ -11,11 +11,9 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Prop, Inject } from 'vue-property-decorator';
+    import { Vue, Component, Prop } from 'vue-property-decorator';
     import { Context, EnableProp, RouteName } from 'ea-router';
     import { ArticleDetail } from '@/domain/views';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
     import { Article } from '@/models/Article';
     import ContentRender from '@/components/render';
 
@@ -28,7 +26,6 @@
         },
     })
     export default class ArticleDetailPage extends Vue {
-        @Inject(Repository) repository: Repositories;
         @Prop() id: string;
 
         article: Article = null;

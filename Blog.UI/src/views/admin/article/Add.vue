@@ -29,12 +29,10 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject } from 'vue-property-decorator';
+    import { Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { AddArticle, ArticleManage } from '@/domain/views';
     import { Article, ContentFormat } from '@/models/Article';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
     import MarkdownEditor from '@/components/editor';
     import BasePage from '@/infrastructure/basePage';
     import { Category } from '@/domains/Category';
@@ -47,8 +45,6 @@
         },
     })
     export default class AddArticlePage extends BasePage {
-        @Inject(Repository) repository: Repositories;
-
         article: Article = {
             categories: [],
             title: '',

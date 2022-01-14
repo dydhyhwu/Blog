@@ -55,13 +55,11 @@
 </template>
 
 <script lang="ts">
-    import { Component, Inject } from 'vue-property-decorator';
+    import { Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { CategoryManage } from '@/domain/views';
     import { ArticleListItem } from '@/models/Article';
     import { Page } from '@/domain/page';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
     import BasePage from '@/infrastructure/basePage';
     import { Confirm, OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
     import { Category } from '@/domains/Category';
@@ -69,8 +67,6 @@
     @RouteName(CategoryManage)
     @Component
     export default class CategoryManagePage extends BasePage {
-        @Inject(Repository) repository: Repositories;
-
         headers = [
             {
                 text: '名称',

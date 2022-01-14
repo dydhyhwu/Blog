@@ -5,12 +5,8 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Provide } from 'vue-property-decorator';
-    import { Repository } from '@/domain/providers';
-    import RepositoryImpl, { Repositories } from '@/infrastructure/repository';
+    import { Vue, Component } from 'vue-property-decorator';
 
     @Component
-    export default class AppEntry extends Vue {
-        @Provide(Repository) repository: Repositories = new RepositoryImpl();
-    }
+    export default class AppEntry extends Vue {}
 </script>

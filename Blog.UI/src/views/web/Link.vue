@@ -10,23 +10,20 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Inject, Prop } from 'vue-property-decorator';
+    import { Component, Prop } from 'vue-property-decorator';
     import { Context, EnableProp, RouteName } from 'ea-router';
     import { FavoriteLinkInfo } from '@/domain/views';
     import { FavoriteLink } from '@/models/FavoriteLink';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
+    import BasePage from '../../infrastructure/basePage';
 
     @RouteName(FavoriteLinkInfo)
     @Context('id')
     @EnableProp()
     @Component
-    export default class FavoriteLinkPage extends Vue {
+    export default class FavoriteLinkPage extends BasePage {
         @Prop() id: string;
 
         link: FavoriteLink = null;
-
-        @Inject(Repository) repository: Repositories;
 
         mounted() {
             this.getLink();

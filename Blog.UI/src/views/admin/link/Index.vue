@@ -18,18 +18,15 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Inject } from 'vue-property-decorator';
+    import { Vue, Component } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
     import { AddFavoriteLink, LinkManage } from '@/domain/views';
     import { FavoriteLink } from '@/models/FavoriteLink';
     import { Page } from '@/domain/page';
-    import { Repository } from '@/domain/providers';
-    import { Repositories } from '@/infrastructure/repository';
 
     @RouteName(LinkManage)
     @Component
     export default class extends Vue {
-        @Inject(Repository) repository: Repositories;
         headers = [
             {
                 text: '标题',
