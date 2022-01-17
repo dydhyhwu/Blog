@@ -26,11 +26,11 @@ pipeline {
                 steps {
                     sh "docker build --build-arg VUE_APP_API_URL=/api -t ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} ."
                     sh "docker tag ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} ${DOCKER_REPOSITORY_NAME}:latest"
-                }
-                script {
-                    docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
-                        docker.image("${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME}").push()
-                        docker.image("${DOCKER_REPOSITORY_NAME}:latest").push()
+                    script {
+                        docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
+                            docker.image("${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME}").push()
+                            docker.image("${DOCKER_REPOSITORY_NAME}:latest").push()
+                        }
                     }
                 }
             }
@@ -38,11 +38,11 @@ pipeline {
                 steps {
                     sh "docker build --build-arg VUE_APP_API_URL=/api BUILD_MODE=WEB -t ${WEB_REPOSITORY_NAME}:${IMAGE_NAME} ."
                     sh "docker tag ${WEB_REPOSITORY_NAME}:${IMAGE_NAME} ${WEB_REPOSITORY_NAME}:latest"
-                }
-                script {
-                    docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
-                        docker.image("${WEB_REPOSITORY_NAME}:${IMAGE_NAME}").push()
-                        docker.image("${WEB_REPOSITORY_NAME}:latest").push()
+                    script {
+                        docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
+                            docker.image("${WEB_REPOSITORY_NAME}:${IMAGE_NAME}").push()
+                            docker.image("${WEB_REPOSITORY_NAME}:latest").push()
+                        }
                     }
                 }
             }
@@ -50,11 +50,11 @@ pipeline {
                 steps {
                     sh "docker build --build-arg VUE_APP_API_URL=/api BUILD_MODE=WEB -t ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ."
                     sh "docker tag ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ${MANAGE_REPOSITORY_NAME}:latest"
-                }
-                script {
-                    docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
-                        docker.image("${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME}").push()
-                        docker.image("${MANAGE_REPOSITORY_NAME}:latest").push()
+                    script {
+                        docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
+                            docker.image("${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME}").push()
+                            docker.image("${MANAGE_REPOSITORY_NAME}:latest").push()
+                        }
                     }
                 }
             }
