@@ -53,7 +53,7 @@ pipeline {
             stage('纯管理端') {
                 steps {
                     dir('./Blog.UI') {
-                        sh "docker build --build-arg VUE_APP_API_URL=/api --build-arg BUILD_MODE=WEB -t ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ."
+                        sh "docker build --build-arg VUE_APP_API_URL=/api --build-arg BUILD_MODE=MANAGE -t ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ."
                         sh "docker tag ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ${MANAGE_REPOSITORY_NAME}:latest"
                         script {
                             docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
