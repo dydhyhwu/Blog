@@ -1,0 +1,64 @@
+pipeline {
+  agent any
+  environment {
+      DOCKER_REGISTRY_HOSTNAME = "${TCR_REGISTRY_HOSTNAME}"
+      DOCKER_REGISTRY_CREDENTIAL = "${TCR_REGISTRY_CREDENTIAL}"
+      DOCKER_REPOSITORY_NAME = "${TCR_NAMESPACE_NAME}/${TCR_REPOSITORY_NAME}"
+      WEB_REPOSITORY_NAME = "${TCR_NAMESPACE_NAME}/${TCR_REPOSITORY_NAME}-web"
+      MANAGE_REPOSITORY_NAME = "${TCR_NAMESPACE_NAME}/${TCR_REPOSITORY_NAME}-manage"
+      IMAGE_NAME = "${env.GIT_LOCAL_BRANCH}-${env.GIT_COMMIT_SHORT}"
+    }
+  stages {
+    stage('检出') {
+      steps {
+        checkout([
+          $class: 'GitSCM', 
+          branches: [[name: GIT_BUILD_REF]],
+          userRemoteConfigs: [[
+            url: GIT_REPO_URL,
+            credentialsId: CREDENTIALS_ID
+          ]]])
+        }
+      }
+      stage('构建并推送镜像') {
+        parallel{
+            stage('前台、管理端一体') {
+                steps {
+                    sh "docker build --build-arg VUE_APP_API_URL=/api -t ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} ."
+                    sh "docker tag ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} ${DOCKER_REPOSITORY_NAME}:latest"
+                }
+                script {
+                    docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
+                        docker.image("${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME}").push()
+                        docker.image("${DOCKER_REPOSITORY_NAME}:latest").push()
+                    }
+                }
+            }
+            stage('纯前台') {
+                steps {
+                    sh "docker build --build-arg VUE_APP_API_URL=/api BUILD_MODE=WEB -t ${WEB_REPOSITORY_NAME}:${IMAGE_NAME} ."
+                    sh "docker tag ${WEB_REPOSITORY_NAME}:${IMAGE_NAME} ${WEB_REPOSITORY_NAME}:latest"
+                }
+                script {
+                    docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
+                        docker.image("${WEB_REPOSITORY_NAME}:${IMAGE_NAME}").push()
+                        docker.image("${WEB_REPOSITORY_NAME}:latest").push()
+                    }
+                }
+            }
+            stage('纯管理端') {
+                steps {
+                    sh "docker build --build-arg VUE_APP_API_URL=/api BUILD_MODE=WEB -t ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ."
+                    sh "docker tag ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ${MANAGE_REPOSITORY_NAME}:latest"
+                }
+                script {
+                    docker.withRegistry("https://${DOCKER_REGISTRY_HOSTNAME}", "${DOCKER_REGISTRY_CREDENTIAL}") {
+                        docker.image("${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME}").push()
+                        docker.image("${MANAGE_REPOSITORY_NAME}:latest").push()
+                    }
+                }
+            }
+        }
+      }
+    }
+  }

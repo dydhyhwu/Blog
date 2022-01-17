@@ -4,9 +4,15 @@ WORKDIR /app
 COPY . .
 COPY /src/config/index.ts.docker ./src/config/index.ts
 ARG VUE_APP_API_URL
+ARG BUILD_MODE=ALL
+
 ENV VUE_APP_API_URL $VUE_APP_API_URL
-RUN npm install
-RUN npm run build
+ENV BUILD_MODE $BUILD_MODE
+
+RUN chmod +x /build/build.sh && \
+    ./build/build.sh && \
+    npm install && \
+    npm run build
 
 # production stage
 FROM nginx:stable-alpine as production-stage
