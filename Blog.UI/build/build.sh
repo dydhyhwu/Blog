@@ -1,4 +1,3 @@
-cd ../
 
 if [[ $BUILD_MODE = 'ALL' ]]; then
     cp -f ./src/router/all.ts ./src/router/index.ts
