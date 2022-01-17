@@ -9,7 +9,7 @@ ARG BUILD_MODE=ALL
 ENV VUE_APP_API_URL $VUE_APP_API_URL
 ENV BUILD_MODE $BUILD_MODE
 
-RUN chmod +x /build/build.sh && \
+RUN chmod +x ./build/build.sh && \
     ./build/build.sh && \
     npm install && \
     npm run build
