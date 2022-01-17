@@ -24,7 +24,7 @@ pipeline {
         parallel{
             stage('前台、管理端一体') {
                 steps {
-                    dir('Blog.UI') {
+                    dir('./Blog.UI') {
                         sh "docker build --build-arg VUE_APP_API_URL=/api -t ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} ."
                         sh "docker tag ${DOCKER_REPOSITORY_NAME}:${IMAGE_NAME} ${DOCKER_REPOSITORY_NAME}:latest"
                         script {
@@ -38,7 +38,7 @@ pipeline {
             }
             stage('纯前台') {
                 steps {
-                    dir('Blog.UI') {
+                    dir('./Blog.UI') {
                         sh "docker build --build-arg VUE_APP_API_URL=/api --build-arg BUILD_MODE=WEB -t ${WEB_REPOSITORY_NAME}:${IMAGE_NAME} ."
                         sh "docker tag ${WEB_REPOSITORY_NAME}:${IMAGE_NAME} ${WEB_REPOSITORY_NAME}:latest"
                         script {
@@ -52,7 +52,7 @@ pipeline {
             }
             stage('纯管理端') {
                 steps {
-                    dir('Blog.UI') {
+                    dir('./Blog.UI') {
                         sh "cd Blog.UI"
                         sh "docker build --build-arg VUE_APP_API_URL=/api --build-arg BUILD_MODE=WEB -t ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ."
                         sh "docker tag ${MANAGE_REPOSITORY_NAME}:${IMAGE_NAME} ${MANAGE_REPOSITORY_NAME}:latest"
