@@ -1,4 +1,5 @@
-﻿using ZeroSum.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using ZeroSum.Attributes;
 
 namespace Blog.Core.Domain;
 
@@ -12,6 +13,7 @@ public class CodeSnippet : BaseEntity
     /// 所属语言（不使用枚举，因为不需要对其进行处理）
     /// 只是用于标识，以及渲染时根据语言来进行关键字识别
     /// </summary>
+    [MaxLength(32)]
     public string Language { get; set; }
     
     /// <summary>
