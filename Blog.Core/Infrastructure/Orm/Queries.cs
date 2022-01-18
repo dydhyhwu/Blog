@@ -1,5 +1,6 @@
 ﻿using System;
 using Blog.Core.Domain;
+using ZeroSum.Domain.Entities;
 using ZeroSum.Domain.Repositories;
 
 namespace Blog.Core.Infrastructure.Orm
@@ -18,5 +19,7 @@ namespace Blog.Core.Infrastructure.Orm
         IQuery<CosProvider> GetCosProviderBy(Guid id);
         IQuery<CosProvider> GetCosProvider();
         IQuery<CosProvider> GetEnableCosProvider();
+        IQuery<CodeSnippet> GetCodeSnippetBy(Guid id);
+        IQuery<CodeSnippet> GetCodeSnippet();
     }
 }

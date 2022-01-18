@@ -87,5 +87,15 @@ namespace Blog.Core.Infrastructure.Orm
         {
             return QueryByEntity<CosProvider>.Of(query => query.Where(x => x.Enable == true));
         }
+
+        public IQuery<CodeSnippet> GetCodeSnippetBy(Guid id)
+        {
+            return QueryByEntity<CodeSnippet>.Of(query => query.Where(x => x.Id == id));
+        }
+
+        public IQuery<CodeSnippet> GetCodeSnippet()
+        {
+            return QueryByEntity<CodeSnippet>.Of(query => query.OrderByDescending(x => x.CreateTime));
+        }
     }
 }
