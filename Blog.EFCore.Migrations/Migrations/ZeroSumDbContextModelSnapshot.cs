@@ -108,6 +108,10 @@ namespace Blog.EFCore.Migrations.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("varchar(32)");
 
+                    b.Property<string>("Title")
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
                     b.HasKey("Id");
 
                     b.ToTable("CodeSnippet");
