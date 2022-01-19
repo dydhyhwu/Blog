@@ -11,6 +11,17 @@
                     </v-col>
                 </v-row>
             </template>
+            <template #item.options="{ item }">
+                <v-btn
+                    class="mx-2"
+                    color="error"
+                    text
+                    depressed
+                    @click="remove(item)"
+                >
+                    删除
+                </v-btn>
+            </template>
         </v-data-table>
     </div>
 </template>
@@ -22,6 +33,7 @@
     import BasePage from '@/infrastructure/basePage';
     import { SnippetItem } from '@/models/Snippet';
     import { Page } from '@/domain/page';
+    import { Confirm, OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
 
     @RouteName(CodeSnippetManage)
     @Component
@@ -42,6 +54,10 @@
             };
         }
 
+        async loadData(): Promise<void> {
+            await this.OnPageIndexChanged();
+        }
+
         @Watch('page.index', { immediate: true, deep: true })
         async OnPageIndexChanged(): Promise<void> {
             const { data, count, page } = await this.repository.Snippet.List(
@@ -50,6 +66,14 @@
             this.items = data;
             this.page.page = page;
             this.page.count = count;
+        }
+
+        @Confirm('删除后不可找回，是否删除？')
+        @OnFinishedSuccess('删除成功')
+        @WithLoading('删除中')
+        async remove(item: SnippetItem): Promise<void> {
+            await this.repository.Snippet.Remove(item.id);
+            await this.loadData();
         }
     }
 </script>

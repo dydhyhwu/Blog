@@ -11,4 +11,11 @@ export default class CodeSnippetRepository {
     Add(snippet: AddSnippet) {
         return AxiosHttp.Instance.post('/CodeSnippet/Add', snippet);
     }
+
+    async Remove(id: string) {
+        const data = {
+            id: id,
+        };
+        return AxiosHttp.Instance.post('/CodeSnippet/Delete', data);
+    }
 }

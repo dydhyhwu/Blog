@@ -33,11 +33,11 @@ public class CodeSnippetController : BaseController
     /// <summary>
     /// 删除代码片段
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="input"></param>
     [HttpPost]
-    public void Delete(Guid id)
+    public void Delete(DeleteCodeSnippetInput input)
     {
-        service.Remove(id);
+        service.Remove(input.Id);
     }
 
     /// <summary>
