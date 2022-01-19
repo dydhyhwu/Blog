@@ -67,7 +67,7 @@ public class CodeSnippetController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public PageList<CodeSnippetItemOutput> List(PageListInput input)
+    public PageList<CodeSnippetItemOutput> List([FromQuery]PageListInput input)
     {
         return service.List(input);
     }

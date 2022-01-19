@@ -16,3 +16,12 @@ export const Categories = 'Categories';
 
 // 博客-导航展示页面
 export const Links = 'Links';
+
+// 代码片段-新增
+export const AddCodeSnippet = 'AddCodeSnippet';
+
+// 代码片段-编辑
+export const EditCodeSnippet = 'EditCodeSnippet';
+
+// 代码片段-管理列表
+export const CodeSnippetManage = 'CodeSnippetManage';

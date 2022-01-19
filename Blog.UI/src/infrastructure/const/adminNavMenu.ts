@@ -5,6 +5,7 @@ import {
     CategoryManage,
     CloudAccountManage,
     CloudProviderManage,
+    CodeSnippetManage,
     LinkManage,
 } from '@/domain/views';
 
@@ -22,6 +23,11 @@ export const AdminNavMenu: MenuItem[] = [
                 icon: 'mdi-file-document',
                 title: '文章管理',
                 routeName: ArticleManage,
+            },
+            {
+                icon: 'mdi-link',
+                title: '代码片段',
+                routeName: CodeSnippetManage,
             },
             {
                 icon: 'mdi-link',

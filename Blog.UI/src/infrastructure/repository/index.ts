@@ -3,6 +3,7 @@ import ArticleRepository from '@/infrastructure/repository/ArticleRepository';
 import CategoryRepository from '@/infrastructure/repository/CategoryRepository';
 import CloudAccountRepository from './CloudAccountRepository';
 import CosProviderRepository from './CosProviderRepository';
+import CodeSnippetRepository from './CodeSnippetRepository';
 
 export interface Repositories {
     CosProvider: CosProviderRepository;
@@ -10,6 +11,7 @@ export interface Repositories {
     Category: CategoryRepository;
     FavoriteLink: FavoriteLinkRepository;
     Article: ArticleRepository;
+    Snippet: CodeSnippetRepository;
 }
 
 export default class RepositoryImpl implements Repositories {
@@ -18,4 +20,5 @@ export default class RepositoryImpl implements Repositories {
     Article: ArticleRepository = new ArticleRepository();
     CloudAccount = new CloudAccountRepository();
     CosProvider: CosProviderRepository = new CosProviderRepository();
+    Snippet: CodeSnippetRepository = new CodeSnippetRepository();
 }
