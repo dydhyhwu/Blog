@@ -7,26 +7,36 @@
         Vue,
         Component,
         Ref,
-        Model,
         ModelSync,
+        Prop,
+        Watch,
     } from 'vue-property-decorator';
     import * as monaco from 'monaco-editor';
+    import { editor, languages } from 'monaco-editor';
+    import IStandaloneCodeEditor = editor.IStandaloneCodeEditor;
 
     @Component
     export default class CodeEditor extends Vue {
         @Ref() readonly editor: HTMLDivElement;
         @ModelSync('value', 'input') content;
+        @Prop({ type: String, default: () => '' }) readonly lang: string;
 
-        instance: any;
+        instance: IStandaloneCodeEditor | null = null;
 
         mounted(): void {
             this.init();
         }
 
+        @Watch('lang', { immediate: true, deep: true })
+        onLanguageChanged(): void {
+            if (!this.instance) return;
+            console.log(this.lang, this.instance);
+            monaco.editor.setModelLanguage(this.instance.getModel(), this.lang);
+        }
+
         private init() {
             this.instance = monaco.editor.create(this.editor, {
                 value: this.content,
-                language: 'javascript',
                 theme: 'vs-dark',
                 automaticLayout: true,
             });

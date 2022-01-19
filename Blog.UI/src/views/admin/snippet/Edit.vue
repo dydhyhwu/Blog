@@ -5,10 +5,16 @@
                 <v-text-field v-model="snippet.title"></v-text-field>
             </v-row>
             <v-row>
-                <v-text-field v-model="snippet.language"></v-text-field>
+                <v-combobox
+                    v-model="snippet.language"
+                    :items="langs"
+                ></v-combobox>
             </v-row>
             <v-row>
-                <code-editor v-model="snippet.content"></code-editor>
+                <code-editor
+                    v-model="snippet.content"
+                    :lang="snippet.language"
+                ></code-editor>
             </v-row>
             <v-row>
                 <v-btn color="primary" @click="submit">保存</v-btn>
@@ -25,6 +31,7 @@
     import { CodeEditor } from '@/components/editor';
     import { EditSnippet } from '@/models/Snippet';
     import { OnFinishedSuccess } from '@dydhyh/ui-tools';
+    import { languages } from 'monaco-editor';
 
     @RouteName(EditCodeSnippet)
     @Context('id')
@@ -38,6 +45,10 @@
         @Prop({ type: String, default: () => '' }) readonly id: string;
 
         snippet: EditSnippet | null = null;
+
+        get langs(): string[] {
+            return languages.getLanguages().map((x) => x.id);
+        }
 
         mounted(): void {
             this.init();
