@@ -12,6 +12,9 @@
                 </v-row>
             </template>
             <template #item.options="{ item }">
+                <v-btn class="mx-2" text depressed @click="edit(item)">
+                    编辑
+                </v-btn>
                 <v-btn
                     class="mx-2"
                     color="error"
@@ -29,7 +32,11 @@
 <script lang="ts">
     import { Component, Watch } from 'vue-property-decorator';
     import { RouteName } from 'ea-router';
-    import { AddCodeSnippet, CodeSnippetManage } from '@/domain/views';
+    import {
+        AddCodeSnippet,
+        CodeSnippetManage,
+        EditCodeSnippet,
+    } from '@/domain/views';
     import BasePage from '@/infrastructure/basePage';
     import { SnippetItem } from '@/models/Snippet';
     import { Page } from '@/domain/page';
@@ -74,6 +81,10 @@
         async remove(item: SnippetItem): Promise<void> {
             await this.repository.Snippet.Remove(item.id);
             await this.loadData();
+        }
+
+        async edit(item: SnippetItem): Promise<void> {
+            this.navigator.redirect(EditCodeSnippet, { id: item.id });
         }
     }
 </script>

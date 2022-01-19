@@ -3,12 +3,19 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Ref } from 'vue-property-decorator';
+    import {
+        Vue,
+        Component,
+        Ref,
+        Model,
+        ModelSync,
+    } from 'vue-property-decorator';
     import * as monaco from 'monaco-editor';
 
     @Component
     export default class CodeEditor extends Vue {
         @Ref() readonly editor: HTMLDivElement;
+        @ModelSync('value', 'input') content;
 
         instance: any;
 
@@ -18,10 +25,13 @@
 
         private init() {
             this.instance = monaco.editor.create(this.editor, {
-                value: '',
+                value: this.content,
                 language: 'javascript',
                 theme: 'vs-dark',
                 automaticLayout: true,
+            });
+            this.instance.onDidChangeModelContent(() => {
+                this.content = this.instance.getValue();
             });
         }
     }

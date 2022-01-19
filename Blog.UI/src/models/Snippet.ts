@@ -16,3 +16,13 @@ export interface AddSnippet {
     language: string;
     content: string;
 }
+
+/**
+ * 编辑
+ */
+export interface EditSnippet {
+    id: string;
+    title: string;
+    language: string;
+    content: string;
+}
