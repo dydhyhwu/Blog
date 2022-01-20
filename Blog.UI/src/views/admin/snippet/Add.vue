@@ -7,17 +7,21 @@
             ></v-text-field>
         </v-row>
         <v-row>
-            <v-text-field
+            <v-combobox
                 v-model="snippet.language"
+                :items="langs"
                 placeholder="选择语言"
-            ></v-text-field>
+            ></v-combobox>
         </v-row>
         <v-row>
-            <code-editor></code-editor>
+            <code-editor
+                v-model="snippet.content"
+                :lang="snippet.language"
+            ></code-editor>
         </v-row>
         <v-row>
             <v-spacer></v-spacer>
-            <v-btn @click="submit">提交</v-btn>
+            <v-btn color="primary" @click="submit">提交</v-btn>
         </v-row>
     </v-container>
 </template>
@@ -30,6 +34,7 @@
     import { AddSnippet } from '@/models/Snippet';
     import { CodeEditor } from '@/components/editor';
     import { OnFinishedSuccess, WithLoading } from '@dydhyh/ui-tools';
+    import { languages } from 'monaco-editor';
 
     @RouteName(AddCodeSnippet)
     @Component({
@@ -39,6 +44,10 @@
     })
     export default class AddCodeSnippetPage extends BasePage {
         snippet: AddSnippet = { content: '', language: '', title: '' };
+
+        get langs(): string[] {
+            return languages.getLanguages().map((x) => x.id);
+        }
 
         @OnFinishedSuccess('添加成功')
         @WithLoading('提交中')

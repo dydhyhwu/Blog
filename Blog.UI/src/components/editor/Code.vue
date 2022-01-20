@@ -37,6 +37,7 @@
         private init() {
             this.instance = monaco.editor.create(this.editor, {
                 value: this.content,
+                language: this.lang,
                 theme: 'vs-dark',
                 automaticLayout: true,
             });
