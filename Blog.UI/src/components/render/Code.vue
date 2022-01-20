@@ -3,23 +3,15 @@
 </template>
 
 <script lang="ts">
-    import {
-        Vue,
-        Component,
-        Ref,
-        ModelSync,
-        Prop,
-        Watch,
-    } from 'vue-property-decorator';
-    import * as monaco from 'monaco-editor';
+    import { Vue, Component, Ref, Prop } from 'vue-property-decorator';
     import { editor } from 'monaco-editor';
     import IStandaloneCodeEditor = editor.IStandaloneCodeEditor;
 
     @Component
-    export default class CodeEditor extends Vue {
+    export default class MonacoEditorCodeView extends Vue {
         @Ref() readonly editor: HTMLDivElement;
-        @ModelSync('value', 'input') content;
         @Prop({ type: String, default: () => '' }) readonly lang: string;
+        @Prop({ type: String, default: () => '' }) readonly content: string;
 
         instance: IStandaloneCodeEditor | null = null;
 
@@ -27,21 +19,13 @@
             this.init();
         }
 
-        @Watch('lang', { immediate: true, deep: true })
-        onLanguageChanged(): void {
-            if (!this.instance) return;
-            monaco.editor.setModelLanguage(this.instance.getModel(), this.lang);
-        }
-
         private init() {
-            this.instance = monaco.editor.create(this.editor, {
+            this.instance = editor.create(this.editor, {
                 value: this.content,
                 language: this.lang,
+                readOnly: true,
                 theme: 'vs-dark',
                 automaticLayout: true,
-            });
-            this.instance.onDidChangeModelContent(() => {
-                this.content = this.instance.getValue();
             });
         }
     }

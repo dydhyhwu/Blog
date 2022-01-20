@@ -1,5 +1,10 @@
 import { Page } from '../../domain/page';
-import { AddSnippet, EditSnippet, SnippetItem } from '../../models/Snippet';
+import {
+    AddSnippet,
+    EditSnippet,
+    Snippet,
+    SnippetItem,
+} from '../../models/Snippet';
 import AxiosHttp from '../http';
 import { PageData } from '../../models/Page';
 
@@ -28,5 +33,12 @@ export default class CodeSnippetRepository {
 
     async Edit(snippet: EditSnippet) {
         return AxiosHttp.Instance.post('/CodeSnippet/Edit', snippet);
+    }
+
+    Detail(id: string): Promise<Snippet> {
+        const param = {
+            id: id,
+        };
+        return AxiosHttp.Instance.get('/CodeSnippet/Detail', param);
     }
 }

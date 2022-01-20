@@ -9,6 +9,7 @@
             </v-btn>
             <v-btn v-bind="btnProps" :to="categories">分类</v-btn>
             <v-btn v-bind="btnProps" :to="links">导航</v-btn>
+            <v-btn v-bind="btnProps" :to="snippets">代码片段</v-btn>
             <v-btn v-bind="btnProps">
                 <v-icon>mdi-account</v-icon>
                 关于
@@ -24,7 +25,7 @@
 
 <script lang="ts">
     import { Component } from 'vue-property-decorator';
-    import { Home, Categories, Links } from '@/domain/views';
+    import { Home, Categories, Links, CodeSnippets } from '@/domain/views';
     import BasePage from '@/infrastructure/basePage';
 
     @Component
@@ -40,6 +41,10 @@
 
         get categories() {
             return this.getRoute(Categories);
+        }
+
+        get snippets() {
+            return this.getRoute(CodeSnippets);
         }
 
         toHome(): void {

@@ -25,3 +25,9 @@ export const EditCodeSnippet = 'EditCodeSnippet';
 
 // 代码片段-管理列表
 export const CodeSnippetManage = 'CodeSnippetManage';
+
+// 博客-代码片段展示页
+export const CodeSnippets = 'CodeSnippets';
+
+// 博客-代码片段详情页
+export const CodeSnippetDetail = 'CodeSnippetDetail';

@@ -26,3 +26,14 @@ export interface EditSnippet {
     language: string;
     content: string;
 }
+
+/**
+ * 详情
+ */
+export interface Snippet {
+    id: string;
+    title: string;
+    language: string;
+    content: string;
+    createTime: string;
+}
