@@ -30,7 +30,6 @@
         @Watch('lang', { immediate: true, deep: true })
         onLanguageChanged(): void {
             if (!this.instance) return;
-            console.log(this.lang, this.instance);
             monaco.editor.setModelLanguage(this.instance.getModel(), this.lang);
         }
 
